@@ -52,6 +52,9 @@
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=plastic&logo=scikit-learn&logoColor=white) 
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=plastic&logo=TensorFlow&logoColor=white)
 
+## 📂 Certification
+[AWS Academy Graduate - AWS Academy Cloud Foundations](./AWS_Academy_Graduate___AWS_Academy_Cloud_Foundations_Badge20241014-7-if3974.pdf)
+
 # 📊 GitHub Stats
 ![](https://github-readme-stats.vercel.app/api?username=taovietducofficial&theme=radical&hide_border=false&include_all_commits=false&count_private=false)<br/>
 ![](https://github-readme-streak-stats.herokuapp.com/?user=taovietducofficial&theme=radical&hide_border=false)<br/>
