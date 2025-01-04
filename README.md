@@ -54,7 +54,6 @@
 
 ## 📂 Certification
 [AWS Academy Graduate - AWS Academy Cloud Foundations](./AWS_Academy_Graduate___AWS_Academy_Cloud_Foundations_Badge20241014-7-if3974.pdf)
-![AWS Academy Graduate Badge].(/AWS_Academy_Graduate___AWS_Academy_Cloud_Foundations_Badge20241014-7-if3974.pdf)
 
 # 📊 GitHub Stats
 ![](https://github-readme-stats.vercel.app/api?username=taovietducofficial&theme=radical&hide_border=false&include_all_commits=false&count_private=false)<br/>
