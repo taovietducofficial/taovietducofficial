@@ -9,7 +9,7 @@ With one year of experience in system analysis, Data Warehouse design, data clea
 My focus is on system optimization, innovation, and business process improvement, ensuring every project achieves maximum efficiency and impact.
 
 
-# 🌐 My Socials
+# 🌐 My Socials @taovietduc
 
 LinkedIn https://www.linkedin.com/in/taovietduc19
 
