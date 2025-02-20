@@ -23,7 +23,7 @@ Threards https://www.threads.net/@taovietduc_/
 
 # 📗 My son : @CODE4LIFEOFFICIAL
 
-<img width="20%" align="right" alt="Github" src="https://avatars.githubusercontent.com/u/165361695?v=4" />
+<img width="15%" align="right" alt="Github" src="https://avatars.githubusercontent.com/u/165361695?v=4" />
 
 
 FanPage https://www.facebook.com/CODE4LIFEOFFICIAL
