@@ -14,7 +14,7 @@ LinkedIn https://www.linkedin.com/in/taovietduc19
 
 Facebook  https://www.facebook.com/taovietduc 
 
-Instagram https://www.instagram.com/taovietduc_
+Instagram https://www.instagram.com/taovietduc_/
 
 TikTok https://www.tiktok.com/@taovietduc_
 
