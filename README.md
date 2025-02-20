@@ -13,44 +13,17 @@ My focus is on system optimization, innovation, and business process improvement
 
 <img width="19%" align="left" alt="Github" src="https://avatars.githubusercontent.com/u/95725645?v=4" hspace="50" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Links</title>
-    <style>
-        .social-buttons {
-            display: flex;
-            gap: 10px;
-        }
-        .social-buttons a {
-            text-decoration: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            color: white;
-            font-weight: bold;
-            display: inline-block;
-        }
-        .linkedin { background-color: #0077b5; }
-        .facebook { background-color: #1877f2; }
-        .instagram { background-color: #e4405f; }
-        .tiktok { background-color: #000; }
-        .threads { background-color: #000; }
+LinkedIn https://www.linkedin.com/in/taovietduc19
 
-        .social-buttons a:hover {
-            opacity: 0.8;
-        }
-    </style>
-</head>
-<body>
-    <div class="social-buttons">
-        <a href="https://www.linkedin.com/in/taovietduc19" class="linkedin" target="_blank">LinkedIn</a>
-        <a href="https://www.facebook.com/taovietduc" class="facebook" target="_blank">Facebook</a>
-        <a href="https://www.instagram.com/taovietduc_/" class="instagram" target="_blank">Instagram</a>
-        <a href="https://www.tiktok.com/@taovietduc_/" class="tiktok" target="_blank">TikTok</a>
-        <a href="https://www.threads.net/@taovietduc_/" class="threads" target="_blank">Threads</a>
-    </div>
-</body>
+Facebook  https://www.facebook.com/taovietduc 
 
+Instagram https://www.instagram.com/taovietduc_/
+
+TikTok https://www.tiktok.com/@taovietduc_/
+
+Threards https://www.threads.net/@taovietduc_/
+
+custom các link đã gắn vào các nút tương ứng 
 
 # 📗 My Son
 
