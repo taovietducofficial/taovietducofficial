@@ -2,9 +2,10 @@
 
 <img width="33%" align="right" alt="Github" src="https://user-images.githubusercontent.com/48678280/88862734-4903af80-d201-11ea-968b-9c939d88a37c.gif" />
 
-<h4 align="justify">As a Data Engineer with strong Software Engineering skills, I am passionate about combining deep data expertise with software development to build comprehensive and high-performance systems. With one year of experience in system analysis, Data Warehouse design, data cleansing, and ETL processes, I integrate these with full-stack development to create well-rounded software solutions. 
+<h3 align="justify">As a Data Engineer with strong Software Engineering skills, I am passionate about combining deep data expertise with software development to build comprehensive and high-performance systems.
+  With one year of experience in system analysis, Data Warehouse design, data cleansing, and ETL processes, I integrate these with full-stack development to create well-rounded software solutions. 
 
-My focus is on system optimization, innovation, and business process improvement, ensuring every project achieves maximum efficiency and impact.</h4> 
+My focus is on system optimization, innovation, and business process improvement, ensuring every project achieves maximum efficiency and impact.</h3> 
 
 
 ## 🌐 Socials
