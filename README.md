@@ -10,6 +10,7 @@ My focus is on system optimization, innovation, and business process improvement
 
 
 # 🌐 My Socials
+
 LinkedIn https://www.linkedin.com/in/taovietduc19
 
 Facebook  https://www.facebook.com/taovietduc 
@@ -17,6 +18,18 @@ Facebook  https://www.facebook.com/taovietduc
 Instagram https://www.instagram.com/taovietduc_/
 
 TikTok https://www.tiktok.com/@taovietduc_/
+
+Threards https://www.threads.net/@taovietduc_/
+
+# 📗 My son : @CODE4LIFE
+
+FanPage https://www.facebook.com/CODE4LIFEOFFICIAL
+
+TikTok https://www.tiktok.com/@code4life.official
+
+Instagram https://www.instagram.com/code4life.official/
+
+Threards https://www.threads.net/@code4life.official
 
 # 💻 Tech Stack
 
