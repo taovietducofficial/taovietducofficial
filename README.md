@@ -18,6 +18,10 @@ My focus is on system optimization, innovation, and business process improvement
 
 # 💻 Tech Stack
 
+<p align="left"> 
+        <img src="https://cdn.dribbble.com/users/1059583/screenshots/4171367/coding-freak.gif" alt="dev" width="100%"/>
+</p>
+
 ### LANGUAGES
 ![C](https://img.shields.io/badge/c-%2300599C.svg?style=plastic&logo=c&logoColor=white) 
 ![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=plastic&logo=c-sharp&logoColor=white) 
