@@ -133,20 +133,5 @@ Threards https://www.threads.net/@code4life.official
 </div>
 
 
-<h2 align="left"> ✍️ Random Dev Quote </h2> 
 
-<div align="center">
-  <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical" />
-</div>
-
-
-
-
----
-
-<div align="center">
-  <a href="https://visitcount.itsvg.in">
-    <img src="https://visitcount.itsvg.in/api?id=taovietducofficial&icon=0&color=0" />
-  </a>
-</div>
 
