@@ -16,7 +16,7 @@ Facebook  https://www.facebook.com/taovietduc
 
 Instagram https://www.instagram.com/taovietduc_/
 
-TikTok https://www.tiktok.com/@taovietduc_
+TikTok https://www.tiktok.com/@taovietduc_/
 
 # 💻 Tech Stack
 
