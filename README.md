@@ -108,21 +108,21 @@ Threards https://www.threads.net/@code4life.official
 </div>
 
 
-<h2 align="left"> 📂 Certification </h2> 
+<h2 align="center"> 📂 Certification </h2> 
 
 [AWS Academy Graduate - AWS Academy Cloud Foundations](./AWS_Academy_Graduate___AWS_Academy_Cloud_Foundations_Badge20241014-7-if3974.pdf)
 
-<h2 align="left"> 📊 GitHub Stats </h2> 
+<h2 align="center"> 📊 GitHub Stats </h2> 
 
 ![](https://github-readme-stats.vercel.app/api?username=taovietducofficial&theme=radical&hide_border=false&include_all_commits=false&count_private=false)<br/>
 ![](https://github-readme-streak-stats.herokuapp.com/?user=taovietducofficial&theme=radical&hide_border=false)<br/>
 ![](https://github-readme-stats.vercel.app/api/top-langs/?username=taovietducofficial&theme=radical&hide_border=false&include_all_commits=false&count_private=false&layout=compact)
 
-<h2 align="left"> 🏆 GitHub Trophies </h2> 
+<h2 align="center"> 🏆 GitHub Trophies </h2> 
 
 ![](https://github-trophies.vercel.app/?username=taovietducofficial&theme=discord&no-frame=false&no-bg=false&margin-w=4)
 
-<h2 align="left"> ✍️ Random Dev Quote </h2> 
+<h2 align="center"> ✍️ Random Dev Quote </h2> 
 
 ![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical)
 
