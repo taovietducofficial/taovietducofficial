@@ -23,8 +23,6 @@ Threards https://www.threads.net/@taovietduc_/
 
 # 📗 My son : @CODE4LIFEOFFICIAL
 
-<img width="33%" align="right" alt="Github" src="https://www.facebook.com/photo/?fbid=122123821292195094&set=a.122095650734195094" />
-
 FanPage https://www.facebook.com/CODE4LIFEOFFICIAL
 
 TikTok https://www.tiktok.com/@code4life.official
@@ -35,6 +33,9 @@ Threards https://www.threads.net/@code4life.official
 
 # 💻 Tech Stack
 
+<p align="center"> 
+        <img src="https://cdn.dribbble.com/users/1059583/screenshots/4171367/coding-freak.gif" alt="dev" width="100%"/>
+</p>
 
 <h2 align="left"> LANGUAGES </h2> 
 
