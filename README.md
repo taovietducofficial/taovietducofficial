@@ -9,21 +9,50 @@ With one year of experience in system analysis, Data Warehouse design, data clea
 My focus is on system optimization, innovation, and business process improvement, ensuring every project achieves maximum efficiency and impact.
 
 
-# 🌐 My Socials @taovietduc
+# 🌐 My Socials
 
 <img width="19%" align="left" alt="Github" src="https://avatars.githubusercontent.com/u/95725645?v=4" hspace="50" />
 
-LinkedIn https://www.linkedin.com/in/taovietduc19
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Links</title>
+    <style>
+        .social-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .social-buttons a {
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .linkedin { background-color: #0077b5; }
+        .facebook { background-color: #1877f2; }
+        .instagram { background-color: #e4405f; }
+        .tiktok { background-color: #000; }
+        .threads { background-color: #000; }
 
-Facebook  https://www.facebook.com/taovietduc 
+        .social-buttons a:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="social-buttons">
+        <a href="https://www.linkedin.com/in/taovietduc19" class="linkedin" target="_blank">LinkedIn</a>
+        <a href="https://www.facebook.com/taovietduc" class="facebook" target="_blank">Facebook</a>
+        <a href="https://www.instagram.com/taovietduc_/" class="instagram" target="_blank">Instagram</a>
+        <a href="https://www.tiktok.com/@taovietduc_/" class="tiktok" target="_blank">TikTok</a>
+        <a href="https://www.threads.net/@taovietduc_/" class="threads" target="_blank">Threads</a>
+    </div>
+</body>
 
-Instagram https://www.instagram.com/taovietduc_/
 
-TikTok https://www.tiktok.com/@taovietduc_/
-
-Threards https://www.threads.net/@taovietduc_/
-
-# 📗 My son : @CODE4LIFEOFFICIAL
+# 📗 My Son
 
 <img width="16%" align="right" alt="Github" src="https://avatars.githubusercontent.com/u/165361695?v=4" hspace="100" />
 
@@ -67,7 +96,7 @@ Threards https://www.threads.net/@code4life.official
 </div>
 
 
-<h2 align="left"> 💡FRAMEWORKS, PLATFORMS & LIBRARIES </h2> 
+<h2 align="left"> 💡FRAMEWORKS & LIBRARIES </h2> 
 
 <div align="center">
   <img src="https://img.shields.io/badge/Bootstrap-%23563D7C?style=for-the-badge&logo=bootstrap&logoColor=white" />
