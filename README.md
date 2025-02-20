@@ -81,13 +81,7 @@ My focus is on system optimization, innovation, and business process improvement
 ### ✍️ Random Dev Quote
 ![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical)
 
-<div align="center">
-  <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/javier1234559/javier1234559/output/github-contribution-grid-snake-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/javier1234559/javier1234559/output/github-contribution-grid-snake.svg">
-  <img alt="github contribution grid snake animation" src="https://raw.githubusercontent.com/javier1234559/javier1234559/output/github-contribution-grid-snake.svg">
-</picture>
-</div>
+
 
 ---
 
