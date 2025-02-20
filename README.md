@@ -42,7 +42,7 @@ Threards https://www.threads.net/@code4life.official
         <img src="https://cdn.dribbble.com/users/1059583/screenshots/4171367/coding-freak.gif" alt="dev" width="100%"/>
 </p>
 
-<h2 align="left"> LANGUAGES </h2> 
+<h2 align="left"> 💡LANGUAGES </h2> 
 
 <div align="center">
   <img src="https://img.shields.io/badge/C-%2300599C?style=for-the-badge&logo=c&logoColor=white" />
@@ -58,7 +58,7 @@ Threards https://www.threads.net/@code4life.official
 
 
 
-<h2 align="left"> HOSTING </h2> 
+<h2 align="left"> 💡HOSTING </h2> 
 
 <div align="center">
   <img src="https://img.shields.io/badge/AWS-%23FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white" />
@@ -67,7 +67,7 @@ Threards https://www.threads.net/@code4life.official
 </div>
 
 
-<h2 align="left"> FRAMEWORKS, PLATFORMS & LIBRARIES </h2> 
+<h2 align="left"> 💡FRAMEWORKS, PLATFORMS & LIBRARIES </h2> 
 
 <div align="center">
   <img src="https://img.shields.io/badge/Bootstrap-%23563D7C?style=for-the-badge&logo=bootstrap&logoColor=white" />
@@ -78,14 +78,14 @@ Threards https://www.threads.net/@code4life.official
 </div>
 
 
-<h2 align="left"> SERVERS </h2> 
+<h2 align="left"> 💡SERVERS </h2> 
 
 <div align="center">
   <img src="https://img.shields.io/badge/Apache-%23D42029?style=for-the-badge&logo=apache&logoColor=white" />
 </div>
  
 
-<h2 align="left"> DATABASES </h2> 
+<h2 align="left"> 💡DATABASES </h2> 
 
 <div align="center">
   <img src="https://img.shields.io/badge/MySQL-%2300f?style=for-the-badge&logo=mysql&logoColor=white" />
@@ -95,7 +95,7 @@ Threards https://www.threads.net/@code4life.official
 </div>
 
 
-<h2 align="left"> DESIGN </h2> 
+<h2 align="left"> 💡DESIGN </h2> 
 
 <div align="center">
   <img src="https://img.shields.io/badge/Canva-%2300C4CC?style=for-the-badge&logo=Canva&logoColor=white" />
@@ -103,7 +103,7 @@ Threards https://www.threads.net/@code4life.official
 </div>
 
 
-<h2 align="left"> ML/DL </h2> 
+<h2 align="left"> 💡ML/DL </h2> 
 
 <div align="center">
   <img src="https://img.shields.io/badge/NumPy-%23013243?style=for-the-badge&logo=numpy&logoColor=white" />
