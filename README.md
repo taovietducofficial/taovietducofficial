@@ -1,3 +1,7 @@
+As a Data Engineer with strong Software Engineering skills, I am passionate about combining deep data expertise with software development to build comprehensive and high-performance systems.
+
+With one year of experience in system analysis, Data Warehouse design, data cleansing, and ETL processes, I integrate these with full-stack development to create well-rounded software solutions. My focus is on system optimization, innovation, and business process improvement, ensuring every project achieves maximum efficiency and impact.
+
 ## 🌐 Socials
 [![Facebook](https://img.shields.io/badge/Facebook-%231877F2.svg?logo=Facebook&logoColor=white)](https://www.facebook.com/taovietduc) 
 [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://www.instagram.com/taovietduc_) 
