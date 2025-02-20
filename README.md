@@ -35,9 +35,6 @@ Threards https://www.threads.net/@code4life.official
 
 # 💻 Tech Stack
 
-<p align="left"> 
-        <img src="https://cdn.dribbble.com/users/1059583/screenshots/4171367/coding-freak.gif" alt="dev" width="100%"/>
-</p>
 
 <h2 align="left"> LANGUAGES </h2> 
 
