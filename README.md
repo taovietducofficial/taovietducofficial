@@ -11,6 +11,8 @@ My focus is on system optimization, innovation, and business process improvement
 
 # 🌐 My Socials @taovietduc
 
+<img width="15%" align="left" alt="Github" src="https://github.com/account" hspace="200" />
+
 LinkedIn https://www.linkedin.com/in/taovietduc19
 
 Facebook  https://www.facebook.com/taovietduc 
@@ -23,7 +25,7 @@ Threards https://www.threads.net/@taovietduc_/
 
 # 📗 My son : @CODE4LIFEOFFICIAL
 
-<img width="15%" align="right" alt="Github" src="https://avatars.githubusercontent.com/u/165361695?v=4" hspace="100" />
+<img width="15%" align="right" alt="Github" src="https://avatars.githubusercontent.com/u/165361695?v=4" hspace="200" />
 
 
 FanPage https://www.facebook.com/CODE4LIFEOFFICIAL
