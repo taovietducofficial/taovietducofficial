@@ -10,11 +10,13 @@ My focus is on system optimization, innovation, and business process improvement
 
 
 # 🌐 My Socials
-Facebook ** https://www.facebook.com/taovietduc ** 
-[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://www.instagram.com/taovietduc_) 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/taovietduc19) 
-[![TikTok](https://img.shields.io/badge/TikTok-%23000000.svg?logo=TikTok&logoColor=white)](https://www.tiktok.com/@taovietduc_) 
-[![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?logo=YouTube&logoColor=white)](https://www.youtube.com/@TAOVIETDUCOFFICIAL) 
+LinkedIn https://www.linkedin.com/in/taovietduc19
+
+Facebook  https://www.facebook.com/taovietduc 
+
+Instagram https://www.instagram.com/taovietduc_
+
+TikTok https://www.tiktok.com/@taovietduc_ 
 
 # 💻 Tech Stack
 
