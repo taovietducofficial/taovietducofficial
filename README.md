@@ -4,6 +4,7 @@
 
 <h4 align="justify">As a Data Engineer with strong Software Engineering skills, I am passionate about combining deep data expertise with software development to build comprehensive and high-performance systems.
 
+
 With one year of experience in system analysis, Data Warehouse design, data cleansing, and ETL processes, I integrate these with full-stack development to create well-rounded software solutions. 
 
 My focus is on system optimization, innovation, and business process improvement, ensuring every project achieves maximum efficiency and impact.</h4> 
