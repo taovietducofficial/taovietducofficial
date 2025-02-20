@@ -37,7 +37,7 @@ Threards https://www.threads.net/@code4life.official
         <img src="https://cdn.dribbble.com/users/1059583/screenshots/4171367/coding-freak.gif" alt="dev" width="100%"/>
 </p>
 
-<h2 align="center"> LANGUAGES </h2> 
+<h2 align="left"> LANGUAGES </h2> 
 
 ![C](https://img.shields.io/badge/c-%2300599C.svg?style=plastic&logo=c&logoColor=white) 
 ![C#](https://img.shields.io/badge/c%23-%23239120.svg?style=plastic&logo=c-sharp&logoColor=white) 
@@ -49,13 +49,13 @@ Threards https://www.threads.net/@code4life.official
 ![Scala](https://img.shields.io/badge/scala-%23DC322F.svg?style=plastic&logo=scala&logoColor=white) 
 ![Python](https://img.shields.io/badge/python-3670A0?style=plastic&logo=python&logoColor=ffdd54)
 
-<h2 align="center"> HOSTING </h2> 
+<h2 align="left"> HOSTING </h2> 
 
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=plastic&logo=amazon-aws&logoColor=white) 
 ![Oracle](https://img.shields.io/badge/Oracle-%23FFD700.svg?style=plastic&logo=oracle&logoColor=white) 
 ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=plastic&logo=vercel&logoColor=white)
 
-<h2 align="center"> FRAMEWORKS, PLATFORMS & LIBRARIES </h2> 
+<h2 align="left"> FRAMEWORKS, PLATFORMS & LIBRARIES </h2> 
 
 ![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=plastic&logo=bootstrap&logoColor=white) 
 ![JWT](https://img.shields.io/badge/JWT-black?style=plastic&logo=JSON%20web%20tokens) 
@@ -63,44 +63,44 @@ Threards https://www.threads.net/@code4life.official
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=plastic&logo=react&logoColor=%2361DAFB) 
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=plastic&logo=tailwind-css&logoColor=white)
 
-<h2 align="center"> SERVERS </h2> 
+<h2 align="left"> SERVERS </h2> 
 
 ![Apache](https://img.shields.io/badge/apache-%23D42029.svg?style=plastic&logo=apache&logoColor=white) 
 
-<h2 align="center"> DATABASES </h2> 
+<h2 align="left"> DATABASES </h2> 
 
 ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=plastic&logo=mysql&logoColor=white) 
 ![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=plastic&logo=redis&logoColor=white) 
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=plastic&logo=mongodb&logoColor=white) 
 ![Oracle](https://img.shields.io/badge/Oracle-%23F80000.svg?style=plastic&logo=oracle&logoColor=white)
 
-<h2 align="center"> DESIGN </h2> 
+<h2 align="left"> DESIGN </h2> 
 
 ![Canva](https://img.shields.io/badge/Canva-%2300C4CC.svg?style=plastic&logo=Canva&logoColor=white) 
 ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=plastic&logo=figma&logoColor=white) 
 
-<h2 align="center"> ML/DL </h2> 
+<h2 align="left"> ML/DL </h2> 
 
 ![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=plastic&logo=numpy&logoColor=white) 
 ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=plastic&logo=pandas&logoColor=white) 
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=plastic&logo=scikit-learn&logoColor=white) 
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=plastic&logo=TensorFlow&logoColor=white)
 
-<h2 align="center"> 📂 Certification </h2> 
+<h2 align="left"> 📂 Certification </h2> 
 
 [AWS Academy Graduate - AWS Academy Cloud Foundations](./AWS_Academy_Graduate___AWS_Academy_Cloud_Foundations_Badge20241014-7-if3974.pdf)
 
-<h2 align="center"> 📊 GitHub Stats </h2> 
+<h2 align="left"> 📊 GitHub Stats </h2> 
 
 ![](https://github-readme-stats.vercel.app/api?username=taovietducofficial&theme=radical&hide_border=false&include_all_commits=false&count_private=false)<br/>
 ![](https://github-readme-streak-stats.herokuapp.com/?user=taovietducofficial&theme=radical&hide_border=false)<br/>
 ![](https://github-readme-stats.vercel.app/api/top-langs/?username=taovietducofficial&theme=radical&hide_border=false&include_all_commits=false&count_private=false&layout=compact)
 
-<h2 align="center"> 🏆 GitHub Trophies </h2> 
+<h2 align="left"> 🏆 GitHub Trophies </h2> 
 
 ![](https://github-trophies.vercel.app/?username=taovietducofficial&theme=discord&no-frame=false&no-bg=false&margin-w=4)
 
-<h2 align="center"> ✍️ Random Dev Quote </h2> 
+<h2 align="left"> ✍️ Random Dev Quote </h2> 
 
 ![](https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical)
 
