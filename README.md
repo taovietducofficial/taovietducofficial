@@ -11,7 +11,7 @@ My focus is on system optimization, innovation, and business process improvement
 
 # 🌐 My Socials @taovietduc
 
-<img width="15%" align="left" alt="Github" src="[https://github.com/account](https://avatars.githubusercontent.com/u/95725645?v=4)" hspace="200" />
+<img width="15%" align="left" alt="Github" src="https://avatars.githubusercontent.com/u/95725645?v=4" hspace="200" />
 
 LinkedIn https://www.linkedin.com/in/taovietduc19
 
