@@ -132,8 +132,7 @@ Threards https://www.threads.net/@code4life.official
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=taovietducofficial&theme=radical&hide_border=false&include_all_commits=false&count_private=false&layout=compact" />
 </div>
 
-<h2 align="left"> 🔝 Top Contributed Repo </h2> 
-![](https://github-contributor-stats.vercel.app/api?username=k0l4s&limit=5&theme=merko&combine_all_yearly_contributions=true)
+
 
 <h2 align="left"> 🏆 GitHub Trophies </h2> 
 
