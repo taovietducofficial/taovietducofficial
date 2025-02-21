@@ -23,7 +23,7 @@ TikTok https://www.tiktok.com/@taovietduc_/
 
 Threards https://www.threads.net/@taovietduc_/
 
-custom các link đã gắn vào các nút tương ứng 
+
 
 # 📗 My Son
 
