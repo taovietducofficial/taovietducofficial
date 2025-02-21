@@ -140,7 +140,7 @@ Threards https://www.threads.net/@code4life.official
 </div>
 
 # 📧 Connect with me: 
-Email: taovietduc.work@gmail.com 
+Email: taovietduc.work@gmail.com  or 
 LinkedIn https://www.linkedin.com/in/taovietduc19
 
 
