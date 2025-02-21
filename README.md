@@ -139,6 +139,8 @@ Threards https://www.threads.net/@code4life.official
   <img src="https://github-trophies.vercel.app/?username=taovietducofficial&theme=discord&no-frame=false&no-bg=false&margin-w=4" />
 </div>
 
-# 📧 Connect with me: taovietduc.work@gmail.com hoặc LinkedIn https://www.linkedin.com/in/taovietduc19
+# 📧 Connect with me: 
+Email: taovietduc.work@gmail.com 
+LinkedIn https://www.linkedin.com/in/taovietduc19
 
 
