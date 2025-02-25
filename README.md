@@ -172,7 +172,9 @@ My focus is on system optimization, innovation, and business process improvement
 
 <h2 align="left"> 🔝 Top Contributed Repo </h2> 
 
-![](https://github-contributor-stats.vercel.app/api?username=taovietducofficial&limit=5&theme=merko&combine_all_yearly_contributions=true)
+<div align="center">
+  <img src="https://github-contributor-stats.vercel.app/api?username=taovietducofficial&limit=5&theme=merko&combine_all_yearly_contributions=true" />
+</div>
 
 
 <div align="center">
