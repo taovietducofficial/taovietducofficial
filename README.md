@@ -45,16 +45,28 @@ My focus is on system optimization, innovation, and business process improvement
 
 # 📗 Founder of Code4Life
 
-<img width="16%" align="right" alt="Github" src="https://avatars.githubusercontent.com/u/165361695?v=4" hspace="100" />
+<p align="center">
+    <img src="https://avatars.githubusercontent.com/u/165361695?v=4" width="150" style="border-radius: 50%;" />
+  </a>
+</p>
 
+<h3 align="center">✨ Click below to learn more! ✨</h3>
 
-FanPage https://www.facebook.com/CODE4LIFEOFFICIAL
+<p align="center">
+  <a href="https://www.facebook.com/CODE4LIFEOFFICIAL" target="_blank">
+    <img src="https://img.shields.io/badge/-FanPage-1877F2?style=for-the-badge&logo=facebook&logoColor=white">
+  </a>
+  <a href="https://www.tiktok.com/@code4life.official" target="_blank">
+    <img src="https://img.shields.io/badge/-TikTok-000000?style=for-the-badge&logo=tiktok&logoColor=white">
+  </a>
+  <a href="https://www.instagram.com/code4life.official/" target="_blank">
+    <img src="https://img.shields.io/badge/-Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white">
+  </a>
+  <a href="https://www.threads.net/@code4life.official" target="_blank">
+    <img src="https://img.shields.io/badge/-Threads-000000?style=for-the-badge&logo=threads&logoColor=white">
+  </a>
+</p>
 
-TikTok https://www.tiktok.com/@code4life.official
-
-Instagram https://www.instagram.com/code4life.official/
-
-Threards https://www.threads.net/@code4life.official
 
 # 💻 Tech Stack
 
