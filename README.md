@@ -1,18 +1,14 @@
 <h1 align="center">Hello, I'm Tào Việt Đức. Thanks for visiting my GitHub! 👋🏻</h1> 
 
-<div align="center">
-  
-  <img width="33%" align="right" alt="Github Animation" 
-       src="https://user-images.githubusercontent.com/48678280/88862734-4903af80-d201-11ea-968b-9c939d88a37c.gif" />
-  
-  ## 🚀 Data Engineer | Software Engineer  
+<img width="33%" align="right" alt="Github" src="https://user-images.githubusercontent.com/48678280/88862734-4903af80-d201-11ea-968b-9c939d88a37c.gif" />
 
-  🔹 **Passionate about** integrating deep **data expertise** with **software development** to build high-performance systems.  
-  🔹 **1+ years of experience** in system analysis, **Data Warehouse design**, data cleansing, and **ETL processes**.  
-  🔹 Skilled in **Full-Stack Development**, ensuring software solutions are both **scalable & efficient**.  
-  🔹 **Focus Areas:** System optimization, innovation & **business process improvement**.  
+As a Data Engineer with strong Software Engineering skills, I am passionate about combining deep data expertise with software development to build comprehensive and high-performance systems.
 
-</div>
+With one year of experience in system analysis, Data Warehouse design, data cleansing, and ETL processes, I integrate these with full-stack development to create well-rounded software solutions. 
+
+My focus is on system optimization, innovation, and business process improvement, ensuring every project achieves maximum efficiency and impact.
+
+nâng cấp giao diện cho đoạn code này để chuyên nghiệp hơn
 
 
 
