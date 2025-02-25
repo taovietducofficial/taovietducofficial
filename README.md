@@ -18,7 +18,7 @@ My focus is on system optimization, innovation, and business process improvement
   </a>
 </p>
 
-<h3 align="center">✨ Click below to learn more! ✨</h3>
+<h5 align="center">✨ Click below to learn more! ✨</h5>
 
 <p align="center">
   <a href="https://www.linkedin.com/in/taovietduc19" target="_blank">
