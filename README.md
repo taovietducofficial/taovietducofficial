@@ -12,7 +12,7 @@ My focus is on system optimization, innovation, and business process improvement
 # 🌐 My Socials
 
 <p align="center">
-  <a href="https://github.com/taovietduc">
+  <a href="https://github.com/taovietducofficial">
     <img src="https://avatars.githubusercontent.com/u/95725645?v=4" width="150" style="border-radius: 50%;" />
   </a>
 </p>
