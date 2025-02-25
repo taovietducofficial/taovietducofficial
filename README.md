@@ -170,12 +170,10 @@ My focus is on system optimization, innovation, and business process improvement
   <img src="https://github-trophies.vercel.app/?username=taovietducofficial&theme=discord&no-frame=false&no-bg=false&margin-w=4" />
 </div>
 
-# 🔝 Top Contributed Repo
+<h2 align="left"> 🔝 Top Contributed Repo </h2> 
+
 ![](https://github-contributor-stats.vercel.app/api?username=taovietducofficial&limit=5&theme=merko&combine_all_yearly_contributions=true)
 
-# 📧 Connect with me: 
-Email: taovietduc.work@gmail.com  or 
-LinkedIn https://www.linkedin.com/in/taovietduc19
 
 <div align="center">
   <picture>
