@@ -15,23 +15,7 @@ My focus is on system optimization, innovation, and business process improvement
   <img src="https://avatars.githubusercontent.com/u/95725645?v=4" width="150" style="border-radius: 50%;" />
 </p>
 
-<p align="center">
-  <a href="https://www.linkedin.com/in/taovietduc19" target="_blank">
-    <img src="https://img.shields.io/badge/-LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white">
-  </a>
-  <a href="https://www.facebook.com/taovietduc" target="_blank">
-    <img src="https://img.shields.io/badge/-Facebook-1877F2?style=flat-square&logo=facebook&logoColor=white">
-  </a>
-  <a href="https://www.instagram.com/taovietduc_/" target="_blank">
-    <img src="https://img.shields.io/badge/-Instagram-E4405F?style=flat-square&logo=instagram&logoColor=white">
-  </a>
-  <a href="https://www.tiktok.com/@taovietduc_/" target="_blank">
-    <img src="https://img.shields.io/badge/-TikTok-000000?style=flat-square&logo=tiktok&logoColor=white">
-  </a>
-  <a href="https://www.threads.net/@taovietduc_/" target="_blank">
-    <img src="https://img.shields.io/badge/-Threads-000000?style=flat-square&logo=threads&logoColor=white">
-  </a>
-</p>
+<p align="center"> <a href="https://www.linkedin.com/in/taovietduc19" target="_blank"> <img src="https://img.shields.io/badge/-LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white"> </a> <a href="https://www.facebook.com/taovietduc" target="_blank"> <img src="https://img.shields.io/badge/-Facebook-1877F2?style=flat-square&logo=facebook&logoColor=white"> </a> <a href="https://www.instagram.com/taovietduc_/" target="_blank"> <img src="https://img.shields.io/badge/-Instagram-E4405F?style=flat-square&logo=instagram&logoColor=white"> </a> <a href="https://www.tiktok.com/@taovietduc_/" target="_blank"> <img src="https://img.shields.io/badge/-TikTok-000000?style=flat-square&logo=tiktok&logoColor=white"> </a> <a href="https://www.threads.net/@taovietduc_/" target="_blank"> <img src="https://img.shields.io/badge/-Threads-000000?style=flat-square&logo=threads&logoColor=white"> </a> </p>
 
 
 
