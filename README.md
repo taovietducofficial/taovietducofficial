@@ -38,10 +38,13 @@ My focus is on system optimization, innovation, and business process improvement
   </a>
 </p>
 
-My portfolio here [Click me](https://taovietducportfolio.vercel.app/)
-<p align="center">
-  My portfolio here [Click me](https://taovietducportfolio.vercel.app/)
-</p>
+<div align="center">
+
+  **My portfolio here**  
+  [✨ Click me ✨](https://taovietducportfolio.vercel.app/)
+
+</div>
+
 
 
 
