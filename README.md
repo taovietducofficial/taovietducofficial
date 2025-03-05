@@ -8,7 +8,7 @@ With one year of experience in system analysis, Data Warehouse design, data clea
 
 My focus is on system optimization, innovation, and business process improvement, ensuring every project achieves maximum efficiency and impact.
 
-nâng cấp giao diện cho đoạn code này để chuyên nghiệp hơn
+
 
 
 
