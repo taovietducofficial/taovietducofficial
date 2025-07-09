@@ -41,7 +41,7 @@ Innovation, systems thinking, and the ability to connect different areas of work
 
 <div align="center">
 
-  **My portfolio here**  [✨ Click me ✨](https://taovietducportfolio.vercel.app/)
+
 
 </div>
 
