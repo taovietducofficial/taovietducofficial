@@ -2,11 +2,9 @@
 
 <img width="33%" align="right" alt="Github" src="https://user-images.githubusercontent.com/48678280/88862734-4903af80-d201-11ea-968b-9c939d88a37c.gif" />
 
-As a Data Engineer with strong Software Engineering skills, I am passionate about combining deep data expertise with software development to build comprehensive and high-performance systems.
+I am a detail-oriented and proactive individual who values efficiency and responsibility in every task. With experience in roles that require strong analytical thinking, organization, and adaptability, I consistently strive to deliver work that is thorough and reliable.
 
-With one year of experience in system analysis, Data Warehouse design, data cleansing, and ETL processes, I integrate these with full-stack development to create well-rounded software solutions. 
-
-My focus is on system optimization, innovation, and business process improvement, ensuring every project achieves maximum efficiency and impact.
+I am especially interested in improving workflows, optimizing resources, and creating sustainable value for organizations. Innovation, systems thinking, and the ability to connect different areas of work are key principles I bring to every project I’m involved in.
 
 
 
