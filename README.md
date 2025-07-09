@@ -4,7 +4,9 @@
 
 I am a detail-oriented and proactive individual who values efficiency and responsibility in every task. With experience in roles that require strong analytical thinking, organization, and adaptability, I consistently strive to deliver work that is thorough and reliable.
 
-I am especially interested in improving workflows, optimizing resources, and creating sustainable value for organizations. Innovation, systems thinking, and the ability to connect different areas of work are key principles I bring to every project I’m involved in.
+I am especially interested in improving workflows, optimizing resources, and creating sustainable value for organizations.
+
+Innovation, systems thinking, and the ability to connect different areas of work are key principles I bring to every project I’m involved in.
 
 
 
