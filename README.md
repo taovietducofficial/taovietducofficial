@@ -160,10 +160,19 @@ Innovation, systems thinking, and the ability to connect different areas of work
 </div>
 
 
-<h2 align="left"> 📊 GitHub Stats </h2> 
+<h2 align="left"> 📊 GitHub Stats </h2>
+
+<p align="center">
+  <sub>Toàn bộ số liệu bên dưới (⭐ stars, 📦 repos, 👥 followers, commits, PR, issues) được render trực tiếp mỗi lượt xem trang — không qua build hay commit định kỳ, nên luôn là số mới nhất.</sub>
+</p>
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=taovietducofficial&theme=radical&hide_border=false&include_all_commits=false&count_private=false" /><br/>
+  <img src="https://img.shields.io/github/followers/taovietducofficial?style=for-the-badge&color=1E90FF&logo=github&label=Followers" />
+  <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.github.com%2Fusers%2Ftaovietducofficial&query=%24.public_repos&label=Public%20Repos&style=for-the-badge&color=orange&logo=github" />
+</div>
+
+<div align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=taovietducofficial&theme=radical&hide_border=false&include_all_commits=false&count_private=false&show_icons=true" /><br/>
   <img src="https://github-readme-streak-stats.herokuapp.com/?user=taovietducofficial&theme=radical&hide_border=false" /><br/>
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=taovietducofficial&theme=radical&hide_border=false&include_all_commits=false&count_private=false&layout=compact" />
 </div>
