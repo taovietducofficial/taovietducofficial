@@ -8,9 +8,8 @@
 [![GitHub Followers](https://img.shields.io/github/followers/taovietducofficial?label=Followers\&style=flat-square)](https://github.com/taovietducofficial)
 [![GitHub Stars](https://img.shields.io/github/stars/taovietducofficial?label=Stars\&style=flat-square)](https://github.com/taovietducofficial)
 
-src="https://cdn.dribbble.com/users/1059583/screenshots/4171367/coding-freak.gif" alt="dev banner" width="100%"/>
 </div>
-
+<img src="https://cdn.dribbble.com/users/1059583/screenshots/4171367/coding-freak.gif" alt="dev banner" width="100%"/> </div>
 ---
 
 ## About
