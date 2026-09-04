@@ -1,13 +1,6 @@
 <h1 align="center">Hello, I'm Tào Việt Đức. Thanks for visiting my GitHub! 👋🏻</h1>
 
-<img width="33%" align="right" alt="Github" src="https://user-images.githubusercontent.com/48678280/88862734-4903af80-d201-11ea-968b-9c939d88a37c.gif" />
-
-I am a detail-oriented and proactive individual who values efficiency and responsibility in every task. With experience in roles that require strong analytical thinking, organization, and adaptability, I consistently strive to deliver work that is thorough and reliable.
-
-I am especially interested in improving workflows, optimizing resources, and creating sustainable value for organizations.
-
-Innovation, systems thinking, and the ability to connect different areas of work are key principles I bring to every project I'm involved in.
-
+<p align="center"> <img src="https://cdn.dribbble.com/users/1059583/screenshots/4171367/coding-freak.gif" alt="dev" width="100%"/> </p>
 ---
 
 ## ⭐ Tổng hợp Stars & Forks trên toàn bộ Repositories
