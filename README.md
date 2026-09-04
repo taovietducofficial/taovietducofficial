@@ -21,8 +21,6 @@ Software Engineering · Backend · System Design · DevOps
 
 <sub>Automatically updated every 6 hours via GitHub Actions.</sub>
 
-<br><br>
-
 <b>Build. Deploy. Monitor. Improve.</b>
 <img src="https://cdn.dribbble.com/users/1059583/screenshots/4171367/coding-freak.gif" alt="dev banner" width="100%"/>
 </div>
