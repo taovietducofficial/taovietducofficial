@@ -2,9 +2,11 @@
 
 # Tào Việt Đức
 
-### Software Developer II | Aspiring DevOps Engineer
+### Software Developer II
+### Aspiring DevOps Engineer
 
-Software Engineering · Backend · System Design · DevOps
+Software Engineering · Backend
+System Design · DevOps
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=17&pause=600&speed=120&color=2E9EF7&center=true&vCenter=true&width=600&lines=Software+Engineering+%7C+DevOps;Backend+%7C+System+Design+%7C+Automation;Build.+Deploy.+Improve." alt="Typing SVG" />
 
