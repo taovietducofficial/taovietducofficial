@@ -13,8 +13,6 @@ Software Engineering · Backend · System Design · DevOps
 
 </div>
 
-## GitHub
-
 <div align="center">
 
 <img src="https://img.shields.io/badge/Repositories-35-blue?style=for-the-badge&logo=github" />
