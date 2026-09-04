@@ -11,8 +11,6 @@ Software Engineering · Backend · System Design · DevOps
 [![Followers](https://img.shields.io/github/followers/taovietducofficial?label=Followers&style=flat-square)](https://github.com/taovietducofficial)
 [![Stars](https://img.shields.io/github/stars/taovietducofficial?label=Stars&style=flat-square)](https://github.com/taovietducofficial)
 
-<br>
-
 <img src="https://img.shields.io/badge/Repositories-35-blue?style=for-the-badge&logo=github" />
 <img src="https://img.shields.io/badge/Stars-1121-yellow?style=for-the-badge&logo=github" />
 <img src="https://img.shields.io/badge/Forks-160-green?style=for-the-badge&logo=git" />
