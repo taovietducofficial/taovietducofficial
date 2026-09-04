@@ -6,7 +6,7 @@
 
 Software Engineering · Backend · System Design · DevOps
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=17&pause=800&speed=100&color=2E9EF7&center=true&vCenter=true&width=600&lines=Software+Engineering+%7C+DevOps;Backend+%7C+System+Design+%7C+Automation;Build.+Deploy.+Improve." alt="Typing SVG" />
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=17&pause=600&speed=100&color=2E9EF7&center=true&vCenter=true&width=600&lines=Software+Engineering+%7C+DevOps;Backend+%7C+System+Design+%7C+Automation;Build.+Deploy.+Improve." alt="Typing SVG" />
 
 [![Followers](https://img.shields.io/github/followers/taovietducofficial?label=Followers\&style=flat-square)](https://github.com/taovietducofficial)
 [![Stars](https://img.shields.io/github/stars/taovietducofficial?label=Stars\&style=flat-square)](https://github.com/taovietducofficial)
