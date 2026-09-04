@@ -11,7 +11,6 @@
 [![GitHub followers](https://img.shields.io/github/followers/taovietducofficial?label=Followers&style=social)](https://github.com/taovietducofficial)
 [![GitHub stars](https://img.shields.io/github/stars/taovietducofficial?label=Stars&style=social)](https://github.com/taovietducofficial)
 
-</div>
 
 ## Tổng hợp Stars & Forks trên toàn bộ Repositories
 
@@ -25,3 +24,4 @@
 <p align="center"><sub> Số liệu được tự động cập nhật bởi GitHub Actions, chạy lại mỗi 6 giờ (xem badge "Update README Stats" trong tab Actions). Cập nhật lần cuối: <em>(sẽ được điền tự động)</em>.</sub></p>
 
 <!-- STATS-END -->
+</div>
