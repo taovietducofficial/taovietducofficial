@@ -1,16 +1,14 @@
 <div align="center">
 
 # Tào Việt Đức
-
 ### Software Developer II | Aspiring DevOps Engineer
-
-Software Engineer focused on building reliable software systems, improving engineering workflows, and continuously learning DevOps practices.
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&pause=1000&color=2E9EF7&center=true&vCenter=true&width=650&lines=Software+Engineering+%7C+DevOps;Backend+Development+%7C+System+Design;Open+Source+%7C+Continuous+Learning" alt="Typing SVG" />
 
 [![GitHub Followers](https://img.shields.io/github/followers/taovietducofficial?label=Followers\&style=flat-square)](https://github.com/taovietducofficial)
 [![GitHub Stars](https://img.shields.io/github/stars/taovietducofficial?label=Stars\&style=flat-square)](https://github.com/taovietducofficial)
 
+src="https://cdn.dribbble.com/users/1059583/screenshots/4171367/coding-freak.gif" alt="dev banner" width="100%"/>
 </div>
 
 ---
