@@ -13,16 +13,6 @@ Software Engineering · Backend · System Design · DevOps
 
 </div>
 
----
-
-## About
-
-Software Developer focused on **backend engineering, system design, and automation**, currently learning and pursuing **DevOps**.
-
-**Focus:** Backend · System Design · CI/CD · Docker · Cloud · Linux · Automation
-
----
-
 ## GitHub
 
 <div align="center">
@@ -36,8 +26,6 @@ Software Developer focused on **backend engineering, system design, and automati
 <sub>Automatically updated every 6 hours via GitHub Actions.</sub>
 
 </div>
-
----
 
 <div align="center">
 
