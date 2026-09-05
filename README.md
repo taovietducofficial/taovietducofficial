@@ -4,8 +4,8 @@
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=17&pause=600&speed=120&color=2E9EF7&center=true&vCenter=true&width=600&lines=Software+Engineering+%7C+DevOps;Backend+%7C+System+Design+%7C+Automation;Build.+Deploy.+Improve." alt="Typing SVG" />
 
-[![Followers](https://img.shields.io/github/followers/taovietducofficial?label=Followers&style=flat-square)](https://github.com/taovietducofficial)
-[![Stars](https://img.shields.io/github/stars/taovietducofficial?label=Stars&style=flat-square)](https://github.com/taovietducofficial)
+# [![Followers](https://img.shields.io/github/followers/taovietducofficial?label=Followers&style=flat-square)](https://github.com/taovietducofficial)
+# [![Stars](https://img.shields.io/github/stars/taovietducofficial?label=Stars&style=flat-square)](https://github.com/taovietducofficial)
 
 <img src="https://img.shields.io/badge/Repositories-35-blue?style=for-the-badge&logo=github" />
 <img src="https://img.shields.io/badge/Stars-1121-yellow?style=for-the-badge&logo=github" />
