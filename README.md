@@ -1,4 +1,3 @@
-```html
 <div align="center">
 
 # Tào Việt Đức
@@ -21,4 +20,3 @@
 <img src="https://cdn.dribbble.com/users/1059583/screenshots/4171367/coding-freak.gif" alt="dev banner" width="100%"/>
 
 </div>
-```
