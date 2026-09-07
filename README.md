@@ -7,8 +7,7 @@
 </picture>
 
 <a href="https://www.linkedin.com/in/taovietducofficial"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"></a>
-<a href="https://www.facebook.com/CODE4LIFEOFFICIAL"><img alt="CODE4LIFE on Facebook" src="https://img.shields.io/badge/CODE4LIFE®-1877F2?style=for-the-badge&logo=facebook&logoColor=white"></a>
-<a href="https://www.instagram.com/taovietduc_"><img alt="Instagram" src="https://img.shields.io/badge/@taovietduc__-E4405F?style=for-the-badge&logo=instagram&logoColor=white"></a>
+<a href="https://github.com/taovietducofficial"><img alt="GitHub" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"></a>
 <a href="https://huggingface.co/taovietducofficial"><img alt="Hugging Face" src="https://img.shields.io/badge/Hugging%20Face-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black"></a>
 
 <br><br>
