@@ -212,7 +212,7 @@ const HERO = {
   prompt: 'taovietducofficial ~ $ whoami',
   name: 'Tào Việt Đức',
   handle: 'Đức',
-  role: `Software Engineer II ${DOT} Content Creator @ CODE4LIFE® (250K+)`,
+  role: `Software Engineer II ${DOT} Aspiring DevOps Engineer`,
   focus: `DSA ${DOT} OOP ${DOT} CI/CD ${DOT} Data Engineering`,
 };
 

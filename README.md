@@ -3,7 +3,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/hero-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/hero-light.svg">
-  <img alt="Tào Việt Đức — Software Engineer II · Content Creator @ CODE4LIFE (250K+)" src="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/hero-light.svg" width="900">
+  <img alt="Tào Việt Đức — Software Engineer II · Aspiring DevOps Engineer" src="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/hero-light.svg" width="900">
 </picture>
 
 <a href="https://www.linkedin.com/in/taovietducofficial"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"></a>

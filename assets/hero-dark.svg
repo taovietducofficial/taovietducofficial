@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 190" width="900" height="190" role="img" aria-label="Tào Việt Đức (Đức) — Software Engineer II · Content Creator @ CODE4LIFE® (250K+)">
-<title>Tào Việt Đức — Software Engineer II · Content Creator @ CODE4LIFE® (250K+)</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 190" width="900" height="190" role="img" aria-label="Tào Việt Đức (Đức) — Software Engineer II · Aspiring DevOps Engineer">
+<title>Tào Việt Đức — Software Engineer II · Aspiring DevOps Engineer</title>
 <defs>
 <linearGradient id="bgG" x1="0" y1="0" x2="1" y2="1">
 <stop offset="0" stop-color="#0d1117"/><stop offset="1" stop-color="#1b2230"/>
@@ -49,6 +49,6 @@
 </g>
 <g class="up" style="animation-delay:.55s"><text x="48" y="106"><tspan class="nm" fill="#e6edf3">Tào Việt Đức</tspan><tspan class="hd" fill="#39c5cf" dx="13">Đức</tspan></text></g>
 <rect class="rule" x="48" y="119.5" width="64" height="3" rx="1.5" fill="url(#accentG)"/>
-<g class="up" style="animation-delay:.7s"><text x="48" y="148" class="rl" fill="#8b949e">Software Engineer II · Content Creator @ CODE4LIFE® (250K+)</text></g>
+<g class="up" style="animation-delay:.7s"><text x="48" y="148" class="rl" fill="#8b949e">Software Engineer II · Aspiring DevOps Engineer</text></g>
 <g class="up" style="animation-delay:.82s"><text x="48" y="171" class="fc" fill="#6e7681">DSA · OOP · CI/CD · Data Engineering</text></g>
 </svg>
