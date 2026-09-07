@@ -254,39 +254,32 @@ function heroSVG(d, key) {
 
   const AX = 92, AY = TOP_M + 132, AR = 38; // avatar center/radius, card-local
 
-  // A 4 -> 3 -> 2 feed-forward graph, kept as a quiet ambient texture behind
-  // the right two-thirds of the identity row rather than a competing focus.
+  // A git branch/merge graph, kept as a quiet ambient texture behind the
+  // right two-thirds of the identity row - closer to this identity (git,
+  // CI/CD, backend) than a generic neural-net motif would be.
   const gy = TOP_M + 136;
-  const layers = [
-    { x: 590, ys: [gy - 36, gy - 12, gy + 12, gy + 36] },
-    { x: 726, ys: [gy - 24, gy, gy + 24] },
-    { x: 856, ys: [gy - 12, gy + 12] },
-  ];
+  const trunkY = gy, branchY = gy - 32;
+  const GX0 = 570, GX1 = 856;
+  const forkX = 636, mergeX = 800;
+  const trunkDots = [GX0, forkX, mergeX, GX1];
+  const branchDots = [700, 760];
 
-  let edges = '';
-  let e = 0;
-  for (let li = 0; li < layers.length - 1; li++) {
-    for (const y1 of layers[li].ys) {
-      for (const y2 of layers[li + 1].ys) {
-        // Negative delays start each edge mid-cycle, so the flow looks unsynchronised.
-        edges += `<line class="edge e${li}" x1="${layers[li].x}" y1="${y1}"`
-          + ` x2="${layers[li + 1].x}" y2="${y2}"`
-          + ` style="animation-delay:${(-(e % 11) * 0.23).toFixed(2)}s"/>`;
-        e++;
-      }
-    }
-  }
+  const trunkPath = `M${GX0},${trunkY} L${GX1},${trunkY}`;
+  const branchPath = `M${forkX},${trunkY} C${forkX + 26},${trunkY} ${forkX + 26},${branchY} ${forkX + 52},${branchY}`
+    + ` L${mergeX - 26},${branchY} C${mergeX},${branchY} ${mergeX},${trunkY} ${mergeX + 26},${trunkY}`;
 
-  let nodes = '';
+  const edges = `<path class="edge trunk" d="${trunkPath}" style="animation-delay:.1s"/>`
+    + `<path class="edge branch" d="${branchPath}" style="animation-delay:.4s"/>`;
+
   let n = 0;
-  layers.forEach((l, li) => {
-    for (const y of l.ys) {
-      nodes += `<circle class="node" cx="${l.x}" cy="${y}" r="3.6"`
-        + ` fill="${li === 2 ? th.accent2 : th.accent}"`
-        + ` style="animation-delay:${(n * 0.17).toFixed(2)}s"/>`;
-      n++;
-    }
-  });
+  const dot = (x, y, c) => {
+    const s = `<circle class="node" cx="${x}" cy="${y}" r="3.6" fill="${c}"`
+      + ` style="animation-delay:${(n * 0.18).toFixed(2)}s"/>`;
+    n++;
+    return s;
+  };
+  const nodes = trunkDots.map((x) => dot(x, trunkY, th.accent)).join('')
+    + branchDots.map((x) => dot(x, branchY, th.accent2)).join('');
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(HERO.name)}, ${fmt(d.followers)} followers ${DASH} ${esc(HERO.role)}">
 <title>${esc(HERO.name)} ${DASH} ${esc(HERO.role)}</title>
@@ -331,17 +324,17 @@ ${nodes}
 .rule{animation:draw .7s cubic-bezier(.2,.7,.3,1) .95s both;transform-box:fill-box;transform-origin:left}
 .hairline{animation:draw .8s cubic-bezier(.2,.7,.3,1) .3s both;transform-box:fill-box;transform-origin:left}
 .glow{animation:breathe 7s ease-in-out infinite}
-.edge{stroke-width:1;stroke-opacity:.28;stroke-dasharray:4 7;animation:flow 2.6s linear infinite}
-.e0{stroke:${th.accent}}
-.e1{stroke:${th.accent2}}
+.edge{fill:none;stroke-width:1.3;stroke-opacity:.32;stroke-linecap:round;stroke-dasharray:460;animation:drawline 1.8s cubic-bezier(.2,.7,.3,1) both}
+.trunk{stroke:${th.accent}}
+.branch{stroke:${th.accent2}}
 .node{animation:pulse 3s ease-in-out infinite}
 @keyframes type{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @keyframes blink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
 @keyframes up{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
 @keyframes avatarIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
 @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes drawline{from{stroke-dashoffset:460}to{stroke-dashoffset:0}}
 @keyframes breathe{0%,100%{opacity:.65}50%{opacity:1}}
-@keyframes flow{to{stroke-dashoffset:-22}}
 @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
 </style>
 <g clip-path="url(#typeClip)">
