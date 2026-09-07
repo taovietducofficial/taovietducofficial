@@ -37,14 +37,14 @@ const THEMES = {
     star: '#e3b341', fork: '#39c5cf', repo: '#a371f7',
     chip: '#21262d', sheen: '#ffffff', sheenOp: '0.09',
     bg0: '#0d1117', bg1: '#1b2230', accent: '#39c5cf', accent2: '#a371f7',
-    shadow: '#000000', shadowOp: '0.55', grainOp: '0.05',
+    grainOp: '0.05',
   },
   light: {
     panel: '#f6f8fa', border: '#d1d9e0', text: '#1f2328', muted: '#59636e', dim: '#818b98',
     star: '#9a6700', fork: '#0969da', repo: '#8250df',
     chip: '#eaeef2', sheen: '#1f2328', sheenOp: '0.07',
     bg0: '#ffffff', bg1: '#e9eff7', accent: '#0969da', accent2: '#8250df',
-    shadow: '#0f2942', shadowOp: '0.16', grainOp: '0.035',
+    grainOp: '0.035',
   },
 };
 
@@ -136,12 +136,6 @@ function grainFilter(id) {
     + `</filter>`;
 }
 
-function shadowFilter(id, th, dy, blur) {
-  return `<filter id="${id}" x="-40%" y="-40%" width="180%" height="220%">`
-    + `<feDropShadow dx="0" dy="${dy}" stdDeviation="${blur}" flood-color="${th.shadow}" flood-opacity="${th.shadowOp}"/>`
-    + `</filter>`;
-}
-
 // --------------------------------------------------------- animated counter
 //
 // A per-digit odometer is fragile to build and to read. This instead stacks sampled
@@ -167,9 +161,7 @@ function ramp(target) {
 function impactSVG(d, key) {
   const th = THEMES[key];
   const W = 900, GAP = 12;
-  const TOP_M = 3, BOTTOM_M = 16;
-  const CH = 132; // card-local tile height
-  const H = TOP_M + CH + BOTTOM_M;
+  const H = 132;
   const TW = (W - GAP * 2) / 3;
 
   const tiles = [
@@ -181,24 +173,23 @@ function impactSVG(d, key) {
   const at = (i) => i * (TW + GAP);
 
   const clips = tiles.map((_, i) =>
-    `<clipPath id="win${i}"><rect x="${at(i)}" y="${TOP_M + 57}" width="${TW}" height="38"/></clipPath>`).join('');
+    `<clipPath id="win${i}"><rect x="${at(i)}" y="57" width="${TW}" height="38"/></clipPath>`).join('');
 
   const sheenClip = `<clipPath id="tiles">`
-    + tiles.map((_, i) => `<rect x="${at(i)}" y="${TOP_M}" width="${TW}" height="${CH}" rx="14"/>`).join('')
+    + tiles.map((_, i) => `<rect x="${at(i)}" y="0" width="${TW}" height="${H}" rx="14"/>`).join('')
     + `</clipPath>`;
 
   const groups = tiles.map((t, i) => {
     const x = at(i);
     const cx = x + TW / 2;
-    const y0 = TOP_M;
     const nums = ramp(t.value).map((v, k) =>
-      `<text x="${cx}" y="${y0 + 86 + k * ROW}" class="n" fill="${t.color}">${fmt(v)}</text>`).join('');
+      `<text x="${cx}" y="${86 + k * ROW}" class="n" fill="${t.color}">${fmt(v)}</text>`).join('');
     return `<g class="tile" style="animation-delay:${(0.05 + i * 0.09).toFixed(2)}s">`
-      + `<rect x="${x}" y="${y0}" width="${TW}" height="${CH}" rx="14" fill="${th.panel}" stroke="${th.border}" filter="url(#tileShadow)"/>`
-      + `<rect x="${x + 0.75}" y="${y0 + 0.75}" width="${TW - 1.5}" height="${CH - 1.5}" rx="13.25" fill="none" stroke="${t.color}" stroke-opacity=".14"/>`
-      + t.icon(cx, y0 + 32, t.color)
+      + `<rect x="${x}" y="0" width="${TW}" height="${H}" rx="14" fill="${th.panel}" stroke="${th.border}"/>`
+      + `<rect x="${x + 0.75}" y="0.75" width="${TW - 1.5}" height="${H - 1.5}" rx="13.25" fill="none" stroke="${t.color}" stroke-opacity=".14"/>`
+      + t.icon(cx, 32, t.color)
       + `<g clip-path="url(#win${i})"><g class="roll" style="animation-delay:${(0.35 + i * 0.1).toFixed(2)}s">${nums}</g></g>`
-      + `<text x="${cx}" y="${y0 + 116}" class="l" fill="${th.muted}">${t.label}</text>`
+      + `<text x="${cx}" y="116" class="l" fill="${th.muted}">${t.label}</text>`
       + `</g>`;
   }).join('');
 
@@ -206,7 +197,6 @@ function impactSVG(d, key) {
 <title>${fmt(d.stars)} stars ${DOT} ${fmt(d.forks)} forks ${DOT} ${d.repoCount} repos</title>
 <defs>${clips}${sheenClip}
 ${grainFilter('grain')}
-${shadowFilter('tileShadow', th, 5, 10)}
 <linearGradient id="sheenG" x1="0" y1="0" x2="1" y2="0">
 <stop offset="0" stop-color="${th.sheen}" stop-opacity="0"/>
 <stop offset=".5" stop-color="${th.sheen}" stop-opacity="${th.sheenOp}"/>
@@ -224,8 +214,8 @@ ${shadowFilter('tileShadow', th, 5, 10)}
 </style>
 ${groups}
 <g clip-path="url(#tiles)">
-<g class="sheen"><rect x="-270" y="${TOP_M - 40}" width="150" height="${CH + 80}" fill="url(#sheenG)" transform="skewX(-18)"/></g>
-<rect x="0" y="${TOP_M}" width="${W}" height="${CH}" filter="url(#grain)" opacity="${th.grainOp}" fill="#ffffff"/>
+<g class="sheen"><rect x="-270" y="-40" width="150" height="${H + 80}" fill="url(#sheenG)" transform="skewX(-18)"/></g>
+<rect x="0" y="0" width="${W}" height="${H}" filter="url(#grain)" opacity="${th.grainOp}" fill="#ffffff"/>
 </g>
 </svg>
 `;
@@ -247,8 +237,8 @@ const HERO = {
 function heroSVG(d, key) {
   const th = THEMES[key];
   const W = 900, CH = 190;
-  const TOP_M = 4, SIDE_M = 4, BOTTOM_M = 18;
-  const H = TOP_M + CH + BOTTOM_M;
+  const TOP_M = 0, SIDE_M = 0;
+  const H = CH;
   const CW = 7.5; // monospace advance width at 12.5px
   const pw = HERO.prompt.length * CW;
 
@@ -301,10 +291,8 @@ function heroSVG(d, key) {
 <clipPath id="typeClip"><rect class="type" x="${48 + SIDE_M}" y="${TOP_M + 44}" width="${(pw + 14).toFixed(1)}" height="24"/></clipPath>
 <clipPath id="avatarClip"><circle cx="${AX}" cy="${AY}" r="${AR}"/></clipPath>
 ${grainFilter('grain')}
-${shadowFilter('cardShadow', th, 7, 16)}
-${shadowFilter('avatarShadow', th, 3, 7)}
 </defs>
-<rect x="${SIDE_M}" y="${TOP_M}" width="${W - SIDE_M * 2}" height="${CH}" rx="16" fill="url(#bgG)" stroke="${th.border}" filter="url(#cardShadow)"/>
+<rect x="${SIDE_M}" y="${TOP_M}" width="${W - SIDE_M * 2}" height="${CH}" rx="16" fill="url(#bgG)" stroke="${th.border}"/>
 <g clip-path="url(#heroClip)">
 <ellipse class="glow" cx="${W - 90}" cy="${TOP_M + CH / 2}" rx="240" ry="150" fill="url(#glowG)"/>
 ${edges}
@@ -343,7 +331,7 @@ ${nodes}
 </g>
 <rect class="hairline" x="${48 + SIDE_M}" y="${TOP_M + 82.5}" width="${W - SIDE_M * 2 - 96}" height="1" fill="${th.border}"/>
 <g class="avatarIn">
-<circle cx="${AX}" cy="${AY}" r="${AR + 3}" fill="url(#ringG)" filter="url(#avatarShadow)"/>
+<circle cx="${AX}" cy="${AY}" r="${AR + 3}" fill="url(#ringG)"/>
 <circle cx="${AX}" cy="${AY}" r="${AR + 1}" fill="${th.bg0}"/>
 <g clip-path="url(#avatarClip)"><image href="${d.avatar}" x="${AX - AR}" y="${AY - AR}" width="${AR * 2}" height="${AR * 2}" preserveAspectRatio="xMidYMid slice"/></g>
 </g>
@@ -370,10 +358,10 @@ const STACK = [
 function stackSVG(key) {
   const th = THEMES[key];
   const W = 900;
-  const TOP_M = 4, SIDE_M = 4, BOTTOM_M = 18;
+  const TOP_M = 0, SIDE_M = 0;
   const ROW_H = 42, PAD = 12;
   const CH = PAD * 2 + STACK.length * ROW_H;
-  const H = TOP_M + CH + BOTTOM_M;
+  const H = CH;
   // accent/fork and accent2/repo are the same hues in THEMES, so the real
   // palette is these three - cycled deliberately rather than padded out
   // with near-duplicates that would read as a color mistake.
@@ -404,9 +392,8 @@ function stackSVG(key) {
 </linearGradient>
 <clipPath id="cardClip"><rect x="${SIDE_M}" y="${TOP_M}" width="${W - SIDE_M * 2}" height="${CH}" rx="16"/></clipPath>
 ${grainFilter('grain')}
-${shadowFilter('cardShadow', th, 7, 16)}
 </defs>
-<rect x="${SIDE_M}" y="${TOP_M}" width="${W - SIDE_M * 2}" height="${CH}" rx="16" fill="url(#bgG)" stroke="${th.border}" filter="url(#cardShadow)"/>
+<rect x="${SIDE_M}" y="${TOP_M}" width="${W - SIDE_M * 2}" height="${CH}" rx="16" fill="url(#bgG)" stroke="${th.border}"/>
 <g clip-path="url(#cardClip)"><rect x="${SIDE_M}" y="${TOP_M}" width="${W - SIDE_M * 2}" height="${CH}" filter="url(#grain)" opacity="${th.grainOp}" fill="#ffffff"/></g>
 <style>
 .lb{font-family:${SANS};font-size:12.5px;font-weight:700;text-anchor:middle}
