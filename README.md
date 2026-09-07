@@ -24,6 +24,18 @@
 
 Software Engineer II based in Ho Chi Minh City · Aspiring DevOps Engineer. I build real-world systems, automate what can be automated, and turn practical engineering experience into free, structured open-source projects to help other developers grow.
 
+## Stack
+
+| | |
+| :-- | :-- |
+| **Frontend** | React · Next.js · Angular · TypeScript · Tailwind CSS |
+| **Backend** | Java · Spring Boot · Go · Node.js · Express · Python |
+| **Data** | PostgreSQL · MongoDB · Redis · Kafka |
+| **GenAI** | GenAI · AI Integration |
+| **DevOps** | Linux · Docker · Kubernetes · GitHub Actions · CI/CD |
+| **Cloud** | AWS · On-Premises |
+| **Engineering** | REST API · Microservices · System Design · Testing · Observability |
+
 <div align="center">
 <img src="https://cdn.dribbble.com/users/1059583/screenshots/4171367/coding-freak.gif" alt="dev banner" width="100%"/>
 </div>
