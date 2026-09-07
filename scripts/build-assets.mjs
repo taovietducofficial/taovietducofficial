@@ -1,19 +1,21 @@
 /**
  * Builds the animated stat SVGs used by the profile README.
  *
- *   node scripts/build-stats.mjs
+ *   node scripts/build-assets.mjs
  *
  * No dependencies - Node 18+ global fetch only.
  *
- * Every figure is read live from the GitHub API, so the committed SVGs are never
- * hand-edited. Animation is plain CSS @keyframes inside each file: a browser renders
- * an <img>-referenced SVG in secure animated mode, which runs declarative CSS but
- * blocks script and external fetches. Third-party card services (github-readme-stats
- * and friends) are deliberately avoided - their free instances go down.
+ * Every figure (and the avatar image) is read live from the GitHub API, so the
+ * committed SVGs are never hand-edited. Animation is plain CSS @keyframes inside
+ * each file: a browser renders an <img>-referenced SVG in secure animated mode,
+ * which runs declarative CSS but blocks script and external fetches - so the
+ * avatar is embedded as a base64 data: URI rather than linked, and third-party
+ * card services (github-readme-stats and friends) are deliberately avoided,
+ * since their free instances go down.
  *
- * Every animation is written so the unanimated resting state is already correct,
- * which is why the counter columns are stacked target-first and roll upward to a
- * zero offset rather than downward from it.
+ * Every counter animation is written so the unanimated resting state is already
+ * correct, which is why the counter columns are stacked target-first and roll
+ * upward to a zero offset rather than downward from it.
  */
 
 import { writeFile } from 'node:fs/promises';
@@ -35,12 +37,14 @@ const THEMES = {
     star: '#e3b341', fork: '#39c5cf', repo: '#a371f7',
     chip: '#21262d', sheen: '#ffffff', sheenOp: '0.09',
     bg0: '#0d1117', bg1: '#1b2230', accent: '#39c5cf', accent2: '#a371f7',
+    shadow: '#000000', shadowOp: '0.55', grainOp: '0.05',
   },
   light: {
     panel: '#f6f8fa', border: '#d1d9e0', text: '#1f2328', muted: '#59636e', dim: '#818b98',
     star: '#9a6700', fork: '#0969da', repo: '#8250df',
     chip: '#eaeef2', sheen: '#1f2328', sheenOp: '0.07',
     bg0: '#ffffff', bg1: '#e9eff7', accent: '#0969da', accent2: '#8250df',
+    shadow: '#0f2942', shadowOp: '0.16', grainOp: '0.035',
   },
 };
 
@@ -65,14 +69,24 @@ async function api(path) {
   return res.json();
 }
 
+async function fetchAvatarDataUri(url) {
+  const res = await fetch(`${url}&s=200`);
+  if (!res.ok) throw new Error(`avatar -> ${res.status} ${res.statusText}`);
+  const buf = Buffer.from(await res.arrayBuffer());
+  const type = res.headers.get('content-type') || 'image/jpeg';
+  return `data:${type};base64,${buf.toString('base64')}`;
+}
+
 async function collect() {
   const [user, repos] = await Promise.all([
     api(`/users/${USER}`),
     api(`/users/${USER}/repos?per_page=100&type=owner`)
       .then((rs) => rs.filter((r) => !r.fork && !r.archived)),
   ]);
+  const avatar = await fetchAvatarDataUri(user.avatar_url);
 
   return {
+    avatar,
     followers: user.followers,
     stars: repos.reduce((n, r) => n + r.stargazers_count, 0),
     forks: repos.reduce((n, r) => n + r.forks_count, 0),
@@ -110,6 +124,24 @@ function repoIcon(x, y, c) {
     + `</g>`;
 }
 
+// ------------------------------------------------------------- shared defs
+//
+// A single fine-grain noise filter, reused by both cards, keeps the panels
+// from reading as flat vector fills - a fixed seed keeps dark/light in sync.
+
+function grainFilter(id) {
+  return `<filter id="${id}" x="-20%" y="-20%" width="140%" height="140%">`
+    + `<feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" stitchTiles="stitch" result="n"/>`
+    + `<feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.7 0"/>`
+    + `</filter>`;
+}
+
+function shadowFilter(id, th, dy, blur) {
+  return `<filter id="${id}" x="-40%" y="-40%" width="180%" height="220%">`
+    + `<feDropShadow dx="0" dy="${dy}" stdDeviation="${blur}" flood-color="${th.shadow}" flood-opacity="${th.shadowOp}"/>`
+    + `</filter>`;
+}
+
 // --------------------------------------------------------- animated counter
 //
 // A per-digit odometer is fragile to build and to read. This instead stacks sampled
@@ -134,7 +166,10 @@ function ramp(target) {
 
 function impactSVG(d, key) {
   const th = THEMES[key];
-  const W = 900, H = 132, GAP = 12;
+  const W = 900, GAP = 12;
+  const TOP_M = 3, BOTTOM_M = 16;
+  const CH = 132; // card-local tile height
+  const H = TOP_M + CH + BOTTOM_M;
   const TW = (W - GAP * 2) / 3;
 
   const tiles = [
@@ -146,35 +181,39 @@ function impactSVG(d, key) {
   const at = (i) => i * (TW + GAP);
 
   const clips = tiles.map((_, i) =>
-    `<clipPath id="win${i}"><rect x="${at(i)}" y="57" width="${TW}" height="38"/></clipPath>`).join('');
+    `<clipPath id="win${i}"><rect x="${at(i)}" y="${TOP_M + 57}" width="${TW}" height="38"/></clipPath>`).join('');
 
   const sheenClip = `<clipPath id="tiles">`
-    + tiles.map((_, i) => `<rect x="${at(i)}" y="0" width="${TW}" height="${H}" rx="12"/>`).join('')
+    + tiles.map((_, i) => `<rect x="${at(i)}" y="${TOP_M}" width="${TW}" height="${CH}" rx="14"/>`).join('')
     + `</clipPath>`;
 
   const groups = tiles.map((t, i) => {
     const x = at(i);
     const cx = x + TW / 2;
+    const y0 = TOP_M;
     const nums = ramp(t.value).map((v, k) =>
-      `<text x="${cx}" y="${86 + k * ROW}" class="n" fill="${t.color}">${fmt(v)}</text>`).join('');
+      `<text x="${cx}" y="${y0 + 86 + k * ROW}" class="n" fill="${t.color}">${fmt(v)}</text>`).join('');
     return `<g class="tile" style="animation-delay:${(0.05 + i * 0.09).toFixed(2)}s">`
-      + `<rect x="${x}" y="0" width="${TW}" height="${H}" rx="12" fill="${th.panel}" stroke="${th.border}"/>`
-      + t.icon(cx, 32, t.color)
+      + `<rect x="${x}" y="${y0}" width="${TW}" height="${CH}" rx="14" fill="${th.panel}" stroke="${th.border}" filter="url(#tileShadow)"/>`
+      + `<rect x="${x + 0.75}" y="${y0 + 0.75}" width="${TW - 1.5}" height="${CH - 1.5}" rx="13.25" fill="none" stroke="${t.color}" stroke-opacity=".14"/>`
+      + t.icon(cx, y0 + 32, t.color)
       + `<g clip-path="url(#win${i})"><g class="roll" style="animation-delay:${(0.35 + i * 0.1).toFixed(2)}s">${nums}</g></g>`
-      + `<text x="${cx}" y="116" class="l" fill="${th.muted}">${t.label}</text>`
+      + `<text x="${cx}" y="${y0 + 116}" class="l" fill="${th.muted}">${t.label}</text>`
       + `</g>`;
   }).join('');
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${fmt(d.stars)} stars, ${fmt(d.forks)} forks and ${d.repoCount} public repositories">
 <title>${fmt(d.stars)} stars ${DOT} ${fmt(d.forks)} forks ${DOT} ${d.repoCount} repos</title>
 <defs>${clips}${sheenClip}
+${grainFilter('grain')}
+${shadowFilter('tileShadow', th, 5, 10)}
 <linearGradient id="sheenG" x1="0" y1="0" x2="1" y2="0">
 <stop offset="0" stop-color="${th.sheen}" stop-opacity="0"/>
 <stop offset=".5" stop-color="${th.sheen}" stop-opacity="${th.sheenOp}"/>
 <stop offset="1" stop-color="${th.sheen}" stop-opacity="0"/>
 </linearGradient></defs>
 <style>
-.n{font-family:${SANS};font-size:34px;font-weight:700;text-anchor:middle}
+.n{font-family:${SANS};font-size:34px;font-weight:700;text-anchor:middle;font-variant-numeric:tabular-nums}
 .l{font-family:${SANS};font-size:10.5px;font-weight:600;letter-spacing:1.4px;text-anchor:middle}
 .tile{animation:fade .55s ease-out both}
 .roll{animation:roll 1.5s steps(${STEPS}) both}
@@ -184,7 +223,10 @@ function impactSVG(d, key) {
 @keyframes sweep{0%,6%{transform:translateX(0)}58%,100%{transform:translateX(1240px)}}
 </style>
 ${groups}
-<g clip-path="url(#tiles)"><g class="sheen"><rect x="-270" y="-40" width="150" height="212" fill="url(#sheenG)" transform="skewX(-18)"/></g></g>
+<g clip-path="url(#tiles)">
+<g class="sheen"><rect x="-270" y="${TOP_M - 40}" width="150" height="${CH + 80}" fill="url(#sheenG)" transform="skewX(-18)"/></g>
+<rect x="0" y="${TOP_M}" width="${W}" height="${CH}" filter="url(#grain)" opacity="${th.grainOp}" fill="#ffffff"/>
+</g>
 </svg>
 `;
 }
@@ -204,15 +246,21 @@ const HERO = {
 
 function heroSVG(d, key) {
   const th = THEMES[key];
-  const W = 900, H = 190;
+  const W = 900, CH = 190;
+  const TOP_M = 4, SIDE_M = 4, BOTTOM_M = 18;
+  const H = TOP_M + CH + BOTTOM_M;
   const CW = 7.5; // monospace advance width at 12.5px
   const pw = HERO.prompt.length * CW;
 
-  // A 4 -> 3 -> 2 feed-forward graph sitting right of the text block.
+  const AX = 92, AY = TOP_M + 132, AR = 38; // avatar center/radius, card-local
+
+  // A 4 -> 3 -> 2 feed-forward graph, kept as a quiet ambient texture behind
+  // the right two-thirds of the identity row rather than a competing focus.
+  const gy = TOP_M + 136;
   const layers = [
-    { x: 652, ys: [44, 78, 112, 146] },
-    { x: 752, ys: [61, 95, 129] },
-    { x: 852, ys: [78, 112] },
+    { x: 590, ys: [gy - 36, gy - 12, gy + 12, gy + 36] },
+    { x: 726, ys: [gy - 24, gy, gy + 24] },
+    { x: 856, ys: [gy - 12, gy + 12] },
   ];
 
   let edges = '';
@@ -233,7 +281,7 @@ function heroSVG(d, key) {
   let n = 0;
   layers.forEach((l, li) => {
     for (const y of l.ys) {
-      nodes += `<circle class="node" cx="${l.x}" cy="${y}" r="4.6"`
+      nodes += `<circle class="node" cx="${l.x}" cy="${y}" r="3.6"`
         + ` fill="${li === 2 ? th.accent2 : th.accent}"`
         + ` style="animation-delay:${(n * 0.17).toFixed(2)}s"/>`;
       n++;
@@ -249,50 +297,67 @@ function heroSVG(d, key) {
 <linearGradient id="accentG" x1="0" y1="0" x2="1" y2="0">
 <stop offset="0" stop-color="${th.accent}"/><stop offset="1" stop-color="${th.accent2}"/>
 </linearGradient>
+<linearGradient id="ringG" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="${th.accent}"/><stop offset="1" stop-color="${th.accent2}"/>
+</linearGradient>
 <radialGradient id="glowG">
-<stop offset="0" stop-color="${th.accent}" stop-opacity=".20"/>
+<stop offset="0" stop-color="${th.accent}" stop-opacity=".22"/>
 <stop offset="1" stop-color="${th.accent}" stop-opacity="0"/>
 </radialGradient>
-<clipPath id="heroClip"><rect x="0" y="0" width="${W}" height="${H}" rx="14"/></clipPath>
-<clipPath id="typeClip"><rect class="type" x="48" y="44" width="${(pw + 14).toFixed(1)}" height="24"/></clipPath>
+<clipPath id="heroClip"><rect x="${SIDE_M}" y="${TOP_M}" width="${W - SIDE_M * 2}" height="${CH}" rx="16"/></clipPath>
+<clipPath id="typeClip"><rect class="type" x="${48 + SIDE_M}" y="${TOP_M + 44}" width="${(pw + 14).toFixed(1)}" height="24"/></clipPath>
+<clipPath id="avatarClip"><circle cx="${AX}" cy="${AY}" r="${AR}"/></clipPath>
+${grainFilter('grain')}
+${shadowFilter('cardShadow', th, 7, 16)}
+${shadowFilter('avatarShadow', th, 3, 7)}
 </defs>
+<rect x="${SIDE_M}" y="${TOP_M}" width="${W - SIDE_M * 2}" height="${CH}" rx="16" fill="url(#bgG)" stroke="${th.border}" filter="url(#cardShadow)"/>
+<g clip-path="url(#heroClip)">
+<ellipse class="glow" cx="${W - 90}" cy="${TOP_M + CH / 2}" rx="240" ry="150" fill="url(#glowG)"/>
+${edges}
+${nodes}
+<rect x="${SIDE_M}" y="${TOP_M}" width="${W - SIDE_M * 2}" height="${CH}" filter="url(#grain)" opacity="${th.grainOp}" fill="#ffffff"/>
+</g>
 <style>
 .p{font-family:${MONO};font-size:12.5px}
-.nm{font-family:${SANS};font-size:32px;font-weight:800}
-.fw{font-family:${SANS};font-size:15px;font-weight:600}
+.nm{font-family:${SANS};font-size:29px;font-weight:800}
+.fw{font-family:${SANS};font-size:14px;font-weight:600}
 .rl{font-family:${SANS};font-size:13.5px}
 .fc{font-family:${MONO};font-size:11.5px;letter-spacing:.4px}
 .type{animation:type 1.45s steps(${HERO.prompt.length + 2}) .25s both;transform-box:fill-box;transform-origin:left}
 .caret{animation:blink 1.06s step-end infinite}
 .up{animation:up .6s cubic-bezier(.2,.7,.3,1) both}
+.avatarIn{animation:avatarIn .7s cubic-bezier(.2,.7,.3,1) .15s both;transform-box:fill-box;transform-origin:center}
 .rule{animation:draw .7s cubic-bezier(.2,.7,.3,1) .95s both;transform-box:fill-box;transform-origin:left}
+.hairline{animation:draw .8s cubic-bezier(.2,.7,.3,1) .3s both;transform-box:fill-box;transform-origin:left}
 .glow{animation:breathe 7s ease-in-out infinite}
-.edge{stroke-width:1.15;stroke-opacity:.45;stroke-dasharray:4 7;animation:flow 2.6s linear infinite}
+.edge{stroke-width:1;stroke-opacity:.28;stroke-dasharray:4 7;animation:flow 2.6s linear infinite}
 .e0{stroke:${th.accent}}
 .e1{stroke:${th.accent2}}
 .node{animation:pulse 3s ease-in-out infinite}
 @keyframes type{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @keyframes blink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
 @keyframes up{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+@keyframes avatarIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
 @keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@keyframes breathe{0%,100%{opacity:.7}50%{opacity:1}}
+@keyframes breathe{0%,100%{opacity:.65}50%{opacity:1}}
 @keyframes flow{to{stroke-dashoffset:-22}}
-@keyframes pulse{0%,100%{opacity:.45}50%{opacity:1}}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
 </style>
-<rect x=".5" y=".5" width="${W - 1}" height="${H - 1}" rx="14" fill="url(#bgG)" stroke="${th.border}"/>
-<g clip-path="url(#heroClip)">
-<ellipse class="glow" cx="800" cy="95" rx="230" ry="140" fill="url(#glowG)"/>
-${edges}
-${nodes}
-</g>
 <g clip-path="url(#typeClip)">
-<text x="48" y="62" class="p" fill="${th.accent}">${esc(HERO.prompt)}</text>
-<rect class="caret" x="${(48 + pw + 3).toFixed(1)}" y="50" width="7" height="13" fill="${th.accent}"/>
+<text x="${48 + SIDE_M}" y="${TOP_M + 62}" class="p" fill="${th.accent}">${esc(HERO.prompt)}</text>
+<rect class="caret" x="${(48 + SIDE_M + pw + 3).toFixed(1)}" y="${TOP_M + 50}" width="7" height="13" fill="${th.accent}"/>
 </g>
-<g class="up" style="animation-delay:.55s"><text x="48" y="106"><tspan class="nm" fill="${th.text}">${esc(HERO.name)}</tspan><tspan class="fw" fill="${th.accent}" dx="14">${fmt(d.followers)} followers</tspan></text></g>
-<rect class="rule" x="48" y="119.5" width="64" height="3" rx="1.5" fill="url(#accentG)"/>
-<g class="up" style="animation-delay:.7s"><text x="48" y="148" class="rl" fill="${th.muted}">${esc(HERO.role)}</text></g>
-<g class="up" style="animation-delay:.82s"><text x="48" y="171" class="fc" fill="${th.dim}">${esc(HERO.focus)}</text></g>
+<rect class="hairline" x="${48 + SIDE_M}" y="${TOP_M + 82.5}" width="${W - SIDE_M * 2 - 96}" height="1" fill="${th.border}"/>
+<g class="avatarIn">
+<circle cx="${AX}" cy="${AY}" r="${AR + 3}" fill="url(#ringG)" filter="url(#avatarShadow)"/>
+<circle cx="${AX}" cy="${AY}" r="${AR + 1}" fill="${th.bg0}"/>
+<g clip-path="url(#avatarClip)"><image href="${d.avatar}" x="${AX - AR}" y="${AY - AR}" width="${AR * 2}" height="${AR * 2}" preserveAspectRatio="xMidYMid slice"/></g>
+</g>
+<g class="up" style="animation-delay:.5s"><text x="${152 + SIDE_M}" y="${TOP_M + 118}"><tspan class="nm" fill="${th.text}">${esc(HERO.name)}</tspan><tspan class="fw" fill="${th.accent}" dx="13">${fmt(d.followers)} followers</tspan></text></g>
+<rect class="rule" x="${152 + SIDE_M}" y="${TOP_M + 128}" width="52" height="3" rx="1.5" fill="url(#accentG)"/>
+<g class="up" style="animation-delay:.62s"><text x="${152 + SIDE_M}" y="${TOP_M + 148}" class="rl" fill="${th.muted}">${esc(HERO.role)}</text></g>
+<g class="up" style="animation-delay:.74s"><text x="${152 + SIDE_M}" y="${TOP_M + 168}" class="fc" fill="${th.dim}">${esc(HERO.focus)}</text></g>
 </svg>
 `;
 }
@@ -313,5 +378,5 @@ for (const [name, svg] of Object.entries(files)) {
 }
 
 console.log(
-  `stars=${data.stars} forks=${data.forks} repos=${data.repoCount}`);
+  `stars=${data.stars} forks=${data.forks} repos=${data.repoCount} followers=${data.followers}`);
 console.log(`wrote ${Object.keys(files).length} files to assets/`);
