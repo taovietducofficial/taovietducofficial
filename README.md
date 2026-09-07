@@ -16,7 +16,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/impact-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/impact-light.svg">
-  <img alt="Total stars, forks and release downloads across all public repositories" src="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/impact-light.svg" width="900">
+  <img alt="Total stars, forks and public repositories" src="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/impact-light.svg" width="900">
 </picture>
 </a>
 

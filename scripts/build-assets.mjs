@@ -32,13 +32,13 @@ const DASH = '—';
 const THEMES = {
   dark: {
     panel: '#161b22', border: '#30363d', text: '#e6edf3', muted: '#8b949e', dim: '#6e7681',
-    star: '#e3b341', fork: '#39c5cf', down: '#3fb950', repo: '#a371f7',
+    star: '#e3b341', fork: '#39c5cf', repo: '#a371f7',
     chip: '#21262d', sheen: '#ffffff', sheenOp: '0.09',
     bg0: '#0d1117', bg1: '#1b2230', accent: '#39c5cf', accent2: '#a371f7',
   },
   light: {
     panel: '#f6f8fa', border: '#d1d9e0', text: '#1f2328', muted: '#59636e', dim: '#818b98',
-    star: '#9a6700', fork: '#0969da', down: '#1a7f37', repo: '#8250df',
+    star: '#9a6700', fork: '#0969da', repo: '#8250df',
     chip: '#eaeef2', sheen: '#1f2328', sheenOp: '0.07',
     bg0: '#ffffff', bg1: '#e9eff7', accent: '#0969da', accent2: '#8250df',
   },
@@ -69,17 +69,9 @@ async function collect() {
   const repos = (await api(`/users/${USER}/repos?per_page=100&type=owner`))
     .filter((r) => !r.fork && !r.archived);
 
-  let downloads = 0;
-  for (const r of repos) {
-    const releases = await api(`/repos/${USER}/${r.name}/releases?per_page=100`);
-    downloads += releases.reduce(
-      (sum, rel) => sum + rel.assets.reduce((s, a) => s + a.download_count, 0), 0);
-  }
-
   return {
     stars: repos.reduce((n, r) => n + r.stargazers_count, 0),
     forks: repos.reduce((n, r) => n + r.forks_count, 0),
-    downloads,
     repoCount: repos.length,
     repos,
   };
@@ -103,14 +95,6 @@ function forkIcon(x, y, c) {
     + `<circle cx="${x + 6}" cy="${y - 6}" r="2.3" stroke="none"/>`
     + `<circle cx="${x}" cy="${y + 6.5}" r="2.3" stroke="none"/>`
     + `<path fill="none" d="M${x - 6} ${y - 3.2} V${y - 1} H${x + 6} V${y - 3.2} M${x} ${y - 1} V${y + 4}"/>`
-    + `</g>`;
-}
-
-function downIcon(x, y, c) {
-  return `<g fill="none" stroke="${c}" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">`
-    + `<path d="M${x} ${y - 7.5} V${y + 1.6}"/>`
-    + `<path d="M${x - 4.2} ${y - 2.4} L${x} ${y + 1.8} L${x + 4.2} ${y - 2.4}"/>`
-    + `<path d="M${x - 6.8} ${y + 6.8} H${x + 6.8}"/>`
     + `</g>`;
 }
 
@@ -147,12 +131,11 @@ function ramp(target) {
 function impactSVG(d, key) {
   const th = THEMES[key];
   const W = 900, H = 132, GAP = 12;
-  const TW = (W - GAP * 3) / 4;
+  const TW = (W - GAP * 2) / 3;
 
   const tiles = [
     { label: 'TOTAL STARS', value: d.stars, color: th.star, icon: starIcon },
     { label: 'FORKS', value: d.forks, color: th.fork, icon: forkIcon },
-    { label: 'DOWNLOADS', value: d.downloads, color: th.down, icon: downIcon },
     { label: 'PUBLIC REPOS', value: d.repoCount, color: th.repo, icon: repoIcon },
   ];
 
@@ -178,8 +161,8 @@ function impactSVG(d, key) {
       + `</g>`;
   }).join('');
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${fmt(d.stars)} stars, ${fmt(d.forks)} forks and ${fmt(d.downloads)} release downloads across ${d.repoCount} public repositories">
-<title>${fmt(d.stars)} stars ${DOT} ${fmt(d.forks)} forks ${DOT} ${fmt(d.downloads)} downloads</title>
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${fmt(d.stars)} stars, ${fmt(d.forks)} forks and ${d.repoCount} public repositories">
+<title>${fmt(d.stars)} stars ${DOT} ${fmt(d.forks)} forks ${DOT} ${d.repoCount} repos</title>
 <defs>${clips}${sheenClip}
 <linearGradient id="sheenG" x1="0" y1="0" x2="1" y2="0">
 <stop offset="0" stop-color="${th.sheen}" stop-opacity="0"/>
@@ -325,5 +308,5 @@ for (const [name, svg] of Object.entries(files)) {
 }
 
 console.log(
-  `stars=${data.stars} forks=${data.forks} downloads=${data.downloads} repos=${data.repoCount}`);
+  `stars=${data.stars} forks=${data.forks} repos=${data.repoCount}`);
 console.log(`wrote ${Object.keys(files).length} files to assets/`);
