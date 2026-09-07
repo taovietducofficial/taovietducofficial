@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 190" width="900" height="190" role="img" aria-label="Tào Việt Đức (Đức) — Software Engineer II · Content Creator @ CODE4LIFE® (250K+)">
+<title>Tào Việt Đức — Software Engineer II · Content Creator @ CODE4LIFE® (250K+)</title>
+<defs>
+<linearGradient id="bgG" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e9eff7"/>
+</linearGradient>
+<linearGradient id="accentG" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0" stop-color="#0969da"/><stop offset="1" stop-color="#8250df"/>
+</linearGradient>
+<radialGradient id="glowG">
+<stop offset="0" stop-color="#0969da" stop-opacity=".20"/>
+<stop offset="1" stop-color="#0969da" stop-opacity="0"/>
+</radialGradient>
+<clipPath id="heroClip"><rect x="0" y="0" width="900" height="190" rx="14"/></clipPath>
+<clipPath id="typeClip"><rect class="type" x="48" y="44" width="231.5" height="24"/></clipPath>
+</defs>
+<style>
+.p{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace;font-size:12.5px}
+.nm{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:32px;font-weight:800}
+.hd{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:17px;font-weight:600}
+.rl{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:13.5px}
+.fc{font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace;font-size:11.5px;letter-spacing:.4px}
+.type{animation:type 1.45s steps(31) .25s both;transform-box:fill-box;transform-origin:left}
+.caret{animation:blink 1.06s step-end infinite}
+.up{animation:up .6s cubic-bezier(.2,.7,.3,1) both}
+.rule{animation:draw .7s cubic-bezier(.2,.7,.3,1) .95s both;transform-box:fill-box;transform-origin:left}
+.glow{animation:breathe 7s ease-in-out infinite}
+.edge{stroke-width:1.15;stroke-opacity:.45;stroke-dasharray:4 7;animation:flow 2.6s linear infinite}
+.e0{stroke:#0969da}
+.e1{stroke:#8250df}
+.node{animation:pulse 3s ease-in-out infinite}
+@keyframes type{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes blink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
+@keyframes up{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+@keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes breathe{0%,100%{opacity:.7}50%{opacity:1}}
+@keyframes flow{to{stroke-dashoffset:-22}}
+@keyframes pulse{0%,100%{opacity:.45}50%{opacity:1}}
+</style>
+<rect x=".5" y=".5" width="899" height="189" rx="14" fill="url(#bgG)" stroke="#d1d9e0"/>
+<g clip-path="url(#heroClip)">
+<ellipse class="glow" cx="800" cy="95" rx="230" ry="140" fill="url(#glowG)"/>
+<line class="edge e0" x1="652" y1="44" x2="752" y2="61" style="animation-delay:0.00s"/><line class="edge e0" x1="652" y1="44" x2="752" y2="95" style="animation-delay:-0.23s"/><line class="edge e0" x1="652" y1="44" x2="752" y2="129" style="animation-delay:-0.46s"/><line class="edge e0" x1="652" y1="78" x2="752" y2="61" style="animation-delay:-0.69s"/><line class="edge e0" x1="652" y1="78" x2="752" y2="95" style="animation-delay:-0.92s"/><line class="edge e0" x1="652" y1="78" x2="752" y2="129" style="animation-delay:-1.15s"/><line class="edge e0" x1="652" y1="112" x2="752" y2="61" style="animation-delay:-1.38s"/><line class="edge e0" x1="652" y1="112" x2="752" y2="95" style="animation-delay:-1.61s"/><line class="edge e0" x1="652" y1="112" x2="752" y2="129" style="animation-delay:-1.84s"/><line class="edge e0" x1="652" y1="146" x2="752" y2="61" style="animation-delay:-2.07s"/><line class="edge e0" x1="652" y1="146" x2="752" y2="95" style="animation-delay:-2.30s"/><line class="edge e0" x1="652" y1="146" x2="752" y2="129" style="animation-delay:0.00s"/><line class="edge e1" x1="752" y1="61" x2="852" y2="78" style="animation-delay:-0.23s"/><line class="edge e1" x1="752" y1="61" x2="852" y2="112" style="animation-delay:-0.46s"/><line class="edge e1" x1="752" y1="95" x2="852" y2="78" style="animation-delay:-0.69s"/><line class="edge e1" x1="752" y1="95" x2="852" y2="112" style="animation-delay:-0.92s"/><line class="edge e1" x1="752" y1="129" x2="852" y2="78" style="animation-delay:-1.15s"/><line class="edge e1" x1="752" y1="129" x2="852" y2="112" style="animation-delay:-1.38s"/>
+<circle class="node" cx="652" cy="44" r="4.6" fill="#0969da" style="animation-delay:0.00s"/><circle class="node" cx="652" cy="78" r="4.6" fill="#0969da" style="animation-delay:0.17s"/><circle class="node" cx="652" cy="112" r="4.6" fill="#0969da" style="animation-delay:0.34s"/><circle class="node" cx="652" cy="146" r="4.6" fill="#0969da" style="animation-delay:0.51s"/><circle class="node" cx="752" cy="61" r="4.6" fill="#0969da" style="animation-delay:0.68s"/><circle class="node" cx="752" cy="95" r="4.6" fill="#0969da" style="animation-delay:0.85s"/><circle class="node" cx="752" cy="129" r="4.6" fill="#0969da" style="animation-delay:1.02s"/><circle class="node" cx="852" cy="78" r="4.6" fill="#8250df" style="animation-delay:1.19s"/><circle class="node" cx="852" cy="112" r="4.6" fill="#8250df" style="animation-delay:1.36s"/>
+</g>
+<g clip-path="url(#typeClip)">
+<text x="48" y="62" class="p" fill="#0969da">taovietducofficial ~ $ whoami</text>
+<rect class="caret" x="268.5" y="50" width="7" height="13" fill="#0969da"/>
+</g>
+<g class="up" style="animation-delay:.55s"><text x="48" y="106"><tspan class="nm" fill="#1f2328">Tào Việt Đức</tspan><tspan class="hd" fill="#0969da" dx="13">Đức</tspan></text></g>
+<rect class="rule" x="48" y="119.5" width="64" height="3" rx="1.5" fill="url(#accentG)"/>
+<g class="up" style="animation-delay:.7s"><text x="48" y="148" class="rl" fill="#59636e">Software Engineer II · Content Creator @ CODE4LIFE® (250K+)</text></g>
+<g class="up" style="animation-delay:.82s"><text x="48" y="171" class="fc" fill="#818b98">DSA · OOP · CI/CD · Data Engineering</text></g>
+</svg>
