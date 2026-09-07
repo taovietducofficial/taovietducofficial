@@ -7,9 +7,6 @@
   <a href="https://github.com/taovietducofficial">
     <img src="https://img.shields.io/github/followers/taovietducofficial?label=Followers&style=for-the-badge&logo=github&logoColor=white" height="40" alt="GitHub Followers">
   </a>
-  <a href="https://github.com/taovietducofficial">
-    <img src="https://img.shields.io/github/stars/taovietducofficial?label=Stars&style=for-the-badge&logo=github&logoColor=white" height="40" alt="GitHub Stars">
-  </a>
 
   <br>
 
