@@ -1,5 +1,5 @@
 /**
- * Builds the animated stat SVGs used by the profile README.
+ * Builds the animated blueprint plates used by the profile README.
  *
  *   node scripts/build-assets.mjs
  *
@@ -16,6 +16,15 @@
  * Every counter animation is written so the unanimated resting state is already
  * correct, which is why the counter columns are stacked target-first and roll
  * upward to a zero offset rather than downward from it.
+ *
+ * All chip and label geometry is measured in monospace advance widths, so text
+ * boxes are computed rather than eyeballed and cannot overflow their plate.
+ *
+ * A browser that never starts an animation - an SVG still below the fold when the
+ * page paints - shows the animation's own resting frame, so two rules keep that
+ * frame honest: anything whose start state would hide or falsify content (the
+ * counter columns, the drawn rules and the pipeline wire) fills `forwards`, never
+ * `both`, and every entrance animates transform only, never opacity.
  */
 
 import { writeFile } from 'node:fs/promises';
@@ -31,20 +40,30 @@ const MONO = "ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace";
 const DOT = '·';
 const DASH = '—';
 
+// Monospace advance ratio - every measured box below derives from this.
+const ADV = 0.6;
+const mw = (text, size, tracking = 0) => text.length * (size * ADV + tracking);
+
+// Cyanotype negative for dark, drafting paper for light. The two are the same
+// drawing under different light, not two different designs.
 const THEMES = {
   dark: {
-    panel: '#161b22', border: '#30363d', text: '#e6edf3', muted: '#8b949e', dim: '#6e7681',
-    star: '#e3b341', fork: '#39c5cf', repo: '#a371f7',
-    chip: '#21262d', sheen: '#ffffff', sheenOp: '0.09',
-    bg0: '#0d1117', bg1: '#1b2230', accent: '#39c5cf', accent2: '#a371f7',
+    bg0: '#08131d', bg1: '#0e2233',
+    grid: '#7dd3fc', gridOp: '0.075', majorOp: '0.16',
+    frame: '#1f4a63',
+    text: '#e6f3fb', muted: '#93b6ca', dim: '#5f8299',
+    accent: '#38bdf8', accent2: '#fbbf24', accent3: '#a78bfa',
+    star: '#fbbf24', fork: '#38bdf8', repo: '#a78bfa',
     grainOp: '0.05',
   },
   light: {
-    panel: '#f6f8fa', border: '#d1d9e0', text: '#1f2328', muted: '#59636e', dim: '#818b98',
-    star: '#9a6700', fork: '#0969da', repo: '#8250df',
-    chip: '#eaeef2', sheen: '#1f2328', sheenOp: '0.07',
-    bg0: '#ffffff', bg1: '#e9eff7', accent: '#0969da', accent2: '#8250df',
-    grainOp: '0.035',
+    bg0: '#f7fafc', bg1: '#e4eef6',
+    grid: '#1d5f80', gridOp: '0.09', majorOp: '0.18',
+    frame: '#b3cbd9',
+    text: '#0c2333', muted: '#43657a', dim: '#5a7d93',
+    accent: '#0b6f96', accent2: '#9a5a00', accent3: '#6d43c8',
+    star: '#9a5a00', fork: '#0b6f96', repo: '#6d43c8',
+    grainOp: '0.03',
   },
 };
 
@@ -96,44 +115,97 @@ async function collect() {
 }
 
 // ------------------------------------------------------------------- icons
+//
+// Drawn as outlines rather than solids so they read as symbols on a technical
+// drawing instead of as UI glyphs.
 
 function starIcon(cx, cy, c) {
   const pts = [];
   for (let i = 0; i < 10; i++) {
     const a = ((-90 + i * 36) * Math.PI) / 180;
-    const r = i % 2 ? 3.2 : 7.6;
+    const r = i % 2 ? 4.2 : 10;
     pts.push(`${(cx + r * Math.cos(a)).toFixed(2)},${(cy + r * Math.sin(a)).toFixed(2)}`);
   }
-  return `<polygon points="${pts.join(' ')}" fill="${c}"/>`;
+  return `<polygon points="${pts.join(' ')}" fill="none" stroke="${c}" stroke-width="1.5" stroke-linejoin="round"/>`;
 }
 
 function forkIcon(x, y, c) {
-  return `<g fill="${c}" stroke="${c}" stroke-width="1.7" stroke-linecap="round">`
-    + `<circle cx="${x - 6}" cy="${y - 6}" r="2.3" stroke="none"/>`
-    + `<circle cx="${x + 6}" cy="${y - 6}" r="2.3" stroke="none"/>`
-    + `<circle cx="${x}" cy="${y + 6.5}" r="2.3" stroke="none"/>`
-    + `<path fill="none" d="M${x - 6} ${y - 3.2} V${y - 1} H${x + 6} V${y - 3.2} M${x} ${y - 1} V${y + 4}"/>`
+  return `<g fill="${c}" stroke="${c}" stroke-width="1.6" stroke-linecap="round">`
+    + `<circle cx="${x - 7}" cy="${y - 7}" r="2.6" fill="none"/>`
+    + `<circle cx="${x + 7}" cy="${y - 7}" r="2.6" fill="none"/>`
+    + `<circle cx="${x}" cy="${y + 7.5}" r="2.6" fill="none"/>`
+    + `<path fill="none" d="M${x - 7} ${y - 4.2} V${y - 1} H${x + 7} V${y - 4.2} M${x} ${y - 1} V${y + 4.7}"/>`
     + `</g>`;
 }
 
 function repoIcon(x, y, c) {
-  return `<g fill="none" stroke="${c}" stroke-width="1.7" stroke-linejoin="round">`
-    + `<path d="M${x - 6} ${y - 5.2} A2.3 2.3 0 0 1 ${x - 3.7} ${y - 7.5} H${x + 6} V${y + 4.4} H${x - 3.7}`
-      + ` A2.3 2.3 0 0 0 ${x - 6} ${y + 6.7} Z"/>`
-    + `<path d="M${x + 6} ${y + 4.4} V${y + 7.5} H${x - 3.7}"/>`
+  return `<g fill="none" stroke="${c}" stroke-width="1.6" stroke-linejoin="round">`
+    + `<path d="M${x - 7} ${y - 6} A2.6 2.6 0 0 1 ${x - 4.4} ${y - 8.6} H${x + 7} V${y + 5} H${x - 4.4}`
+      + ` A2.6 2.6 0 0 0 ${x - 7} ${y + 7.6} Z"/>`
+    + `<path d="M${x + 7} ${y + 5} V${y + 8.6} H${x - 4.4}"/>`
     + `</g>`;
 }
 
-// ------------------------------------------------------------- shared defs
+// ------------------------------------------------------- shared plate parts
 //
-// A single fine-grain noise filter, reused by both cards, keeps the panels
-// from reading as flat vector fills - a fixed seed keeps dark/light in sync.
+// Every asset sits on the same drawing surface: gradient ground, a two-step
+// grid, a hairline frame and inset corner ticks. Defining it once is what keeps
+// the three plates reading as sheets from one drawing set.
 
 function grainFilter(id) {
   return `<filter id="${id}" x="-20%" y="-20%" width="140%" height="140%">`
     + `<feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" stitchTiles="stitch" result="n"/>`
     + `<feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.7 0"/>`
     + `</filter>`;
+}
+
+function plateDefs(th, W, H) {
+  return `<linearGradient id="bgG" x1="0" y1="0" x2="1" y2="1">`
+    + `<stop offset="0" stop-color="${th.bg0}"/><stop offset="1" stop-color="${th.bg1}"/>`
+    + `</linearGradient>`
+    + `<linearGradient id="accentG" x1="0" y1="0" x2="1" y2="0">`
+    + `<stop offset="0" stop-color="${th.accent}"/><stop offset="1" stop-color="${th.accent2}"/>`
+    + `</linearGradient>`
+    + `<pattern id="gm" width="12" height="12" patternUnits="userSpaceOnUse">`
+    + `<path d="M12 0H0V12" fill="none" stroke="${th.grid}" stroke-opacity="${th.gridOp}" stroke-width=".7"/>`
+    + `</pattern>`
+    + `<pattern id="gM" width="60" height="60" patternUnits="userSpaceOnUse">`
+    + `<rect width="60" height="60" fill="url(#gm)"/>`
+    + `<path d="M60 0H0V60" fill="none" stroke="${th.grid}" stroke-opacity="${th.majorOp}" stroke-width="1"/>`
+    + `</pattern>`
+    + `<clipPath id="plate"><rect x="0" y="0" width="${W}" height="${H}" rx="5"/></clipPath>`
+    + grainFilter('grain');
+}
+
+function plateGround(th, W, H, inner = '') {
+  return `<rect x="0" y="0" width="${W}" height="${H}" rx="5" fill="url(#bgG)"/>`
+    + `<g clip-path="url(#plate)">`
+    + `<rect x="0" y="0" width="${W}" height="${H}" fill="url(#gM)"/>`
+    + inner
+    + `<rect x="0" y="0" width="${W}" height="${H}" filter="url(#grain)" opacity="${th.grainOp}" fill="#ffffff"/>`
+    + `</g>`
+    + `<rect x=".5" y=".5" width="${W - 1}" height="${H - 1}" rx="5" fill="none" stroke="${th.frame}"/>`
+    + corners(th, W, H);
+}
+
+function corners(th, W, H, inset = 11, len = 13) {
+  const [a, b] = [inset, inset + len];
+  return `<g fill="none" stroke="${th.accent}" stroke-opacity=".5" stroke-width="1.2">`
+    + `<path d="M${a} ${b}V${a}H${b}"/>`
+    + `<path d="M${W - b} ${a}H${W - a}V${b}"/>`
+    + `<path d="M${W - a} ${H - b}V${H - a}H${W - b}"/>`
+    + `<path d="M${b} ${H - a}H${a}V${H - b}"/>`
+    + `</g>`;
+}
+
+// A drafting scale bar - short ticks every `step`, tall ones every fifth.
+function ruler(th, x0, x1, y, step = 15, up = 8, tall = 14) {
+  let out = '';
+  for (let x = x0, i = 0; x <= x1; x += step, i++) {
+    const h = i % 5 === 0 ? tall : up;
+    out += `<path d="M${x} ${y}V${y - h}"/>`;
+  }
+  return `<g stroke="${th.frame}" stroke-width="1" stroke-opacity=".75">${out}</g>`;
 }
 
 // --------------------------------------------------------- animated counter
@@ -145,7 +217,7 @@ function grainFilter(id) {
 // still shows the true figure rather than a zero.
 
 const STEPS = 14;
-const ROW = 38;
+const ROW = 44; // must exceed the counter window height, or neighbours bleed in
 
 function ramp(target) {
   const out = [];
@@ -156,194 +228,196 @@ function ramp(target) {
   return out.reverse(); // [target, ..., 0]
 }
 
-// -------------------------------------------------------------- impact strip
+// ------------------------------------------------------------ impact plate
+//
+// An instrument panel rather than three separate cards: one continuous sheet
+// divided by hairlines, figures set flush left under their legends, with the
+// scale bar running along the bottom edge.
 
 function impactSVG(d, key) {
   const th = THEMES[key];
-  const W = 900, GAP = 12;
-  const H = 132;
-  const TW = (W - GAP * 2) / 3;
+  const W = 900, H = 134, CELL = W / 3;
 
-  const tiles = [
+  const cells = [
     { label: 'TOTAL STARS', value: d.stars, color: th.star, icon: starIcon },
     { label: 'FORKS', value: d.forks, color: th.fork, icon: forkIcon },
     { label: 'PUBLIC REPOS', value: d.repoCount, color: th.repo, icon: repoIcon },
   ];
 
-  const at = (i) => i * (TW + GAP);
+  const clips = cells.map((_, i) =>
+    `<clipPath id="win${i}"><rect x="${i * CELL + 24}" y="56" width="${CELL - 70}" height="40"/></clipPath>`).join('');
 
-  const clips = tiles.map((_, i) =>
-    `<clipPath id="win${i}"><rect x="${at(i)}" y="57" width="${TW}" height="38"/></clipPath>`).join('');
+  const dividers = [1, 2].map((i) =>
+    `<g stroke="${th.frame}"><path d="M${i * CELL} 30V104" stroke-opacity=".8"/></g>`).join('');
 
-  const sheenClip = `<clipPath id="tiles">`
-    + tiles.map((_, i) => `<rect x="${at(i)}" y="0" width="${TW}" height="${H}" rx="14"/>`).join('')
-    + `</clipPath>`;
-
-  const groups = tiles.map((t, i) => {
-    const x = at(i);
-    const cx = x + TW / 2;
-    const nums = ramp(t.value).map((v, k) =>
-      `<text x="${cx}" y="${86 + k * ROW}" class="n" fill="${t.color}">${fmt(v)}</text>`).join('');
-    return `<g class="tile" style="animation-delay:${(0.05 + i * 0.09).toFixed(2)}s">`
-      + `<rect x="${x}" y="0" width="${TW}" height="${H}" rx="14" fill="${th.panel}" stroke="${th.border}"/>`
-      + `<rect x="${x + 0.75}" y="0.75" width="${TW - 1.5}" height="${H - 1.5}" rx="13.25" fill="none" stroke="${t.color}" stroke-opacity=".14"/>`
-      + t.icon(cx, 32, t.color)
+  const groups = cells.map((c, i) => {
+    const x = i * CELL + 24;
+    const nums = ramp(c.value).map((v, k) =>
+      `<text x="${x}" y="${88 + k * ROW}" class="n" fill="${c.color}">${fmt(v)}</text>`).join('');
+    return `<g class="cell" style="animation-delay:${(0.06 + i * 0.1).toFixed(2)}s">`
+      + `<text x="${x}" y="46" class="l" fill="${th.muted}">${c.label}</text>`
       + `<g clip-path="url(#win${i})"><g class="roll" style="animation-delay:${(0.35 + i * 0.1).toFixed(2)}s">${nums}</g></g>`
-      + `<text x="${cx}" y="116" class="l" fill="${th.muted}">${t.label}</text>`
+      + `<rect class="tick" x="${x}" y="100" width="36" height="2.5" fill="${c.color}"`
+        + ` style="animation-delay:${(0.9 + i * 0.1).toFixed(2)}s"/>`
+      + c.icon(i * CELL + CELL - 44, 72, c.color)
       + `</g>`;
   }).join('');
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${fmt(d.stars)} stars, ${fmt(d.forks)} forks and ${d.repoCount} public repositories">
 <title>${fmt(d.stars)} stars ${DOT} ${fmt(d.forks)} forks ${DOT} ${d.repoCount} repos</title>
-<defs>${clips}${sheenClip}
-${grainFilter('grain')}
-<linearGradient id="sheenG" x1="0" y1="0" x2="1" y2="0">
-<stop offset="0" stop-color="${th.sheen}" stop-opacity="0"/>
-<stop offset=".5" stop-color="${th.sheen}" stop-opacity="${th.sheenOp}"/>
-<stop offset="1" stop-color="${th.sheen}" stop-opacity="0"/>
-</linearGradient></defs>
+<defs>${clips}
+${plateDefs(th, W, H)}
+</defs>
 <style>
-.n{font-family:${SANS};font-size:34px;font-weight:700;text-anchor:middle;font-variant-numeric:tabular-nums}
-.l{font-family:${SANS};font-size:10.5px;font-weight:600;letter-spacing:1.4px;text-anchor:middle}
-.tile{animation:fade .55s ease-out both}
-.roll{animation:roll 1.5s steps(${STEPS}) both}
-.sheen{animation:sweep 6s ease-in-out 2.4s infinite}
-@keyframes fade{from{opacity:0}to{opacity:1}}
+.n{font-family:${SANS};font-size:37px;font-weight:800;font-variant-numeric:tabular-nums}
+.l{font-family:${MONO};font-size:10px;letter-spacing:1.7px}
+.cell{animation:rise .5s cubic-bezier(.2,.7,.3,1) both}
+.roll{animation:roll 1.5s steps(${STEPS}) forwards}
+.tick{animation:grow .5s cubic-bezier(.2,.7,.3,1) forwards;transform-box:fill-box;transform-origin:left}
+@keyframes rise{from{transform:translateY(8px)}to{transform:translateY(0)}}
 @keyframes roll{from{transform:translateY(-${ROW * STEPS}px)}to{transform:translateY(0)}}
-@keyframes sweep{0%,6%{transform:translateX(0)}58%,100%{transform:translateX(1240px)}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 </style>
+${plateGround(th, W, H)}
+${dividers}
+${ruler(th, 24, W - 24, H - 11)}
 ${groups}
-<g clip-path="url(#tiles)">
-<g class="sheen"><rect x="-270" y="-40" width="150" height="${H + 80}" fill="url(#sheenG)" transform="skewX(-18)"/></g>
-<rect x="0" y="0" width="${W}" height="${H}" filter="url(#grain)" opacity="${th.grainOp}" fill="#ffffff"/>
-</g>
 </svg>
 `;
 }
 
-// -------------------------------------------------------------------- hero
+// -------------------------------------------------------------- hero plate
 //
-// The copy here is static, but the file is generated rather than hand-written so
-// the dark and light variants cannot drift apart and the network graph's edge
-// geometry stays derived rather than eyeballed.
+// The copy is static, but the file is generated rather than hand-written so the
+// dark and light sheets cannot drift apart and the pipeline geometry stays
+// derived rather than eyeballed.
 
 const HERO = {
-  prompt: 'taovietducofficial ~ $ whoami',
   name: 'Tào Việt Đức',
   role: `Software Engineer II ${DOT} Aspiring DevOps Engineer`,
   focus: `Backend Engineering ${DOT} System Design ${DOT} DevOps ${DOT} CI/CD`,
+  caption: `OPEN SOURCE ${DOT} SYSTEMS ${DOT} AUTOMATION`,
+  stages: ['CODE', 'BUILD', 'SHIP', 'RUN'],
 };
 
 function heroSVG(d, key) {
   const th = THEMES[key];
-  const W = 900, CH = 190;
-  const TOP_M = 0, SIDE_M = 0;
-  const H = CH;
-  const CW = 7.5; // monospace advance width at 12.5px
-  const pw = HERO.prompt.length * CW;
+  const W = 900, H = 394, CX = W / 2;
 
-  const AX = 92, AY = TOP_M + 132, AR = 38; // avatar center/radius, card-local
+  const AY = 81, AR = 48; // avatar hexagon centre / circumradius, on the centre axis
+  const hex = Array.from({ length: 6 }, (_, i) => {
+    const a = (i * 60 * Math.PI) / 180;
+    return `${(CX + AR * Math.cos(a)).toFixed(2)},${(AY + AR * Math.sin(a)).toFixed(2)}`;
+  }).join(' ');
 
-  // A git branch/merge graph, kept as a quiet ambient texture behind the
-  // right two-thirds of the identity row - closer to this identity (git,
-  // CI/CD, backend) than a generic neural-net motif would be.
-  const gy = TOP_M + 136;
-  const trunkY = gy, branchY = gy - 32;
-  const GX0 = 570, GX1 = 856;
-  const forkX = 636, mergeX = 800;
-  const trunkDots = [GX0, forkX, mergeX, GX1];
-  const branchDots = [700, 760];
+  // A delivery pipeline, not a generic network motif: the packet travels the
+  // same path the work does. Stretched near the full plate width so it reads as
+  // the base of the stack rather than as a fifth line of text.
+  const PGAP = 200, PY = 322;
+  const span = PGAP * (HERO.stages.length - 1);
+  const PX0 = CX - span / 2;
+  const nodes = HERO.stages.map((_, i) => PX0 + i * PGAP);
 
-  const trunkPath = `M${GX0},${trunkY} L${GX1},${trunkY}`;
-  const branchPath = `M${forkX},${trunkY} C${forkX + 26},${trunkY} ${forkX + 26},${branchY} ${forkX + 52},${branchY}`
-    + ` L${mergeX - 26},${branchY} C${mergeX},${branchY} ${mergeX},${trunkY} ${mergeX + 26},${trunkY}`;
+  const pipeline = `<path class="wire" d="M${PX0} ${PY}H${nodes[nodes.length - 1]}" stroke="${th.accent}"/>`
+    + nodes.map((x, i) =>
+      `<g class="node" style="animation-delay:${(i * 0.85).toFixed(2)}s">`
+      + `<circle cx="${x}" cy="${PY}" r="8" fill="${th.bg0}" stroke="${th.accent}" stroke-width="1.5"/>`
+      + `<circle cx="${x}" cy="${PY}" r="3" fill="${th.accent}"/></g>`
+      + `<text x="${x}" y="${PY + 26}" class="sg" fill="${th.dim}">${HERO.stages[i]}</text>`).join('')
+    + `<g class="packet"><circle cx="${PX0}" cy="${PY}" r="3.6" fill="${th.accent2}"/></g>`;
 
-  const edges = `<path class="edge trunk" d="${trunkPath}" style="animation-delay:.1s"/>`
-    + `<path class="edge branch" d="${branchPath}" style="animation-delay:.4s"/>`;
+  const glow = `<ellipse class="glow" cx="${CX}" cy="${AY + 20}" rx="360" ry="210" fill="url(#glowG)"/>`;
 
-  let n = 0;
-  const dot = (x, y, c) => {
-    const s = `<circle class="node" cx="${x}" cy="${y}" r="3.6" fill="${c}"`
-      + ` style="animation-delay:${(n * 0.18).toFixed(2)}s"/>`;
-    n++;
-    return s;
-  };
-  const nodes = trunkDots.map((x) => dot(x, trunkY, th.accent)).join('')
-    + branchDots.map((x) => dot(x, branchY, th.accent2)).join('');
+  // Live follower readout. The count is right-anchored inside a slot sized for
+  // the final figure, so every frame of the roll lands flush against the same
+  // edge and nothing downstream of it shifts while the number climbs.
+  const FS = 12, TR = 1.3, HROW = 20, CHIP_Y = 198, CHIP_H = 31;
+  const baseY = CHIP_Y + CHIP_H / 2 + 4.5;
+  const count = fmt(d.followers);
+  const wLabel = mw('GITHUB', FS, TR), wUnit = mw('FOLLOWERS', FS, TR), wNum = mw(count, FS, TR);
+  const chipW = Math.round(16 + 18 + wLabel + 11 + wNum + 8 + wUnit + 16);
+  const x0 = Math.round(CX - chipW / 2) + 0.5;
+  const labelX = x0 + 34;
+  const slotL = labelX + wLabel + 11;
+  const slotR = slotL + wNum;
+  const unitX = slotR + 8;
+
+  const counter = ramp(d.followers).map((v, k) =>
+    `<text class="num" x="${slotR.toFixed(1)}" y="${baseY + k * HROW}" fill="${th.accent}">${fmt(v)}</text>`).join('');
+
+  const chip = `<rect x="${x0}" y="${CHIP_Y}" width="${chipW}" height="${CHIP_H}" rx="4"`
+    + ` fill="${th.accent}" fill-opacity=".08" stroke="${th.accent}" stroke-opacity=".4"/>`
+    + `<circle class="live" cx="${x0 + 19}" cy="${CHIP_Y + CHIP_H / 2}" r="3.5" fill="${th.accent2}"/>`
+    + `<text x="${labelX.toFixed(1)}" y="${baseY}" class="gh" fill="${th.muted}">GITHUB</text>`
+    + `<g clip-path="url(#fwin)"><g class="hroll">${counter}</g></g>`
+    + `<text x="${unitX.toFixed(1)}" y="${baseY}" class="gh" fill="${th.muted}">FOLLOWERS</text>`;
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(HERO.name)}, ${fmt(d.followers)} followers ${DASH} ${esc(HERO.role)}">
 <title>${esc(HERO.name)} ${DASH} ${esc(HERO.role)}</title>
 <defs>
-<linearGradient id="bgG" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0" stop-color="${th.bg0}"/><stop offset="1" stop-color="${th.bg1}"/>
-</linearGradient>
-<linearGradient id="accentG" x1="0" y1="0" x2="1" y2="0">
-<stop offset="0" stop-color="${th.accent}"/><stop offset="1" stop-color="${th.accent2}"/>
-</linearGradient>
+${plateDefs(th, W, H)}
+<radialGradient id="glowG">
+<stop offset="0" stop-color="${th.accent}" stop-opacity=".2"/>
+<stop offset="1" stop-color="${th.accent}" stop-opacity="0"/>
+</radialGradient>
 <linearGradient id="ringG" x1="0" y1="0" x2="1" y2="1">
 <stop offset="0" stop-color="${th.accent}"/><stop offset="1" stop-color="${th.accent2}"/>
 </linearGradient>
-<radialGradient id="glowG">
-<stop offset="0" stop-color="${th.accent}" stop-opacity=".22"/>
-<stop offset="1" stop-color="${th.accent}" stop-opacity="0"/>
-</radialGradient>
-<clipPath id="heroClip"><rect x="${SIDE_M}" y="${TOP_M}" width="${W - SIDE_M * 2}" height="${CH}" rx="16"/></clipPath>
-<clipPath id="typeClip"><rect class="type" x="${48 + SIDE_M}" y="${TOP_M + 44}" width="${(pw + 14).toFixed(1)}" height="24"/></clipPath>
-<clipPath id="avatarClip"><circle cx="${AX}" cy="${AY}" r="${AR}"/></clipPath>
-${grainFilter('grain')}
+<clipPath id="hexClip"><polygon points="${hex}"/></clipPath>
+<clipPath id="fwin"><rect x="${(slotL - 2).toFixed(1)}" y="${baseY - 13}" width="${(wNum + 4).toFixed(1)}" height="18"/></clipPath>
 </defs>
-<rect x="${SIDE_M}" y="${TOP_M}" width="${W - SIDE_M * 2}" height="${CH}" rx="16" fill="url(#bgG)" stroke="${th.border}"/>
-<g clip-path="url(#heroClip)">
-<ellipse class="glow" cx="${W - 90}" cy="${TOP_M + CH / 2}" rx="240" ry="150" fill="url(#glowG)"/>
-${edges}
-${nodes}
-<rect x="${SIDE_M}" y="${TOP_M}" width="${W - SIDE_M * 2}" height="${CH}" filter="url(#grain)" opacity="${th.grainOp}" fill="#ffffff"/>
-</g>
 <style>
-.p{font-family:${MONO};font-size:12.5px}
-.nm{font-family:${SANS};font-size:29px;font-weight:800}
-.fw{font-family:${SANS};font-size:14px;font-weight:600}
-.rl{font-family:${SANS};font-size:13.5px}
-.fc{font-family:${MONO};font-size:11.5px;letter-spacing:.4px}
-.type{animation:type 1.45s steps(${HERO.prompt.length + 2}) .25s both;transform-box:fill-box;transform-origin:left}
-.caret{animation:blink 1.06s step-end infinite}
+text{text-anchor:middle}
+.nm{font-family:${SANS};font-size:35px;font-weight:800}
+.rl{font-family:${SANS};font-size:15px}
+.gh{font-family:${MONO};font-size:${FS}px;letter-spacing:${TR}px;text-anchor:start}
+.num{font-family:${MONO};font-size:${FS}px;letter-spacing:${TR}px;text-anchor:end;font-variant-numeric:tabular-nums}
+.fc{font-family:${MONO};font-size:12.5px;letter-spacing:.3px}
+.cp{font-family:${MONO};font-size:10.5px;letter-spacing:1.5px}
+.sg{font-family:${MONO};font-size:9.5px;letter-spacing:1.2px}
 .up{animation:up .6s cubic-bezier(.2,.7,.3,1) both}
-.avatarIn{animation:avatarIn .7s cubic-bezier(.2,.7,.3,1) .15s both;transform-box:fill-box;transform-origin:center}
-.rule{animation:draw .7s cubic-bezier(.2,.7,.3,1) .95s both;transform-box:fill-box;transform-origin:left}
-.hairline{animation:draw .8s cubic-bezier(.2,.7,.3,1) .3s both;transform-box:fill-box;transform-origin:left}
+.avatarIn{animation:avatarIn .7s cubic-bezier(.2,.7,.3,1) .12s both;transform-box:fill-box;transform-origin:center}
+.orbit{animation:spin 26s linear infinite;transform-origin:${CX}px ${AY}px}
+.rule{animation:grow .7s cubic-bezier(.2,.7,.3,1) .8s forwards;transform-box:fill-box;transform-origin:center}
 .glow{animation:breathe 7s ease-in-out infinite}
-.edge{fill:none;stroke-width:1.3;stroke-opacity:.32;stroke-linecap:round;stroke-dasharray:460;animation:drawline 1.8s cubic-bezier(.2,.7,.3,1) both}
-.trunk{stroke:${th.accent}}
-.branch{stroke:${th.accent2}}
-.node{animation:pulse 3s ease-in-out infinite}
-@keyframes type{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@keyframes blink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
-@keyframes up{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
-@keyframes avatarIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
-@keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@keyframes drawline{from{stroke-dashoffset:460}to{stroke-dashoffset:0}}
-@keyframes breathe{0%,100%{opacity:.65}50%{opacity:1}}
-@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+.wire{fill:none;stroke-width:1.4;stroke-opacity:.4;stroke-dasharray:${span};animation:draw 1.4s cubic-bezier(.2,.7,.3,1) .3s forwards}
+.node{animation:blip 3.4s ease-in-out infinite}
+.packet{animation:flow 3.4s linear .6s infinite}
+.live{animation:live 2.2s ease-in-out infinite}
+.hroll{animation:hroll 1.9s steps(${STEPS}) .45s forwards}
+@keyframes up{from{transform:translateY(9px)}to{transform:translateY(0)}}
+@keyframes avatarIn{from{transform:scale(.88)}to{transform:scale(1)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes draw{from{stroke-dashoffset:${span}}to{stroke-dashoffset:0}}
+@keyframes breathe{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes blip{0%,100%{opacity:.45}12%{opacity:1}}
+@keyframes flow{0%{transform:translateX(0);opacity:0}6%{opacity:1}94%{opacity:1}100%{transform:translateX(${span}px);opacity:0}}
+@keyframes live{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes hroll{from{transform:translateY(-${HROW * STEPS}px)}to{transform:translateY(0)}}
 </style>
-<g clip-path="url(#typeClip)">
-<text x="${48 + SIDE_M}" y="${TOP_M + 62}" class="p" fill="${th.accent}">${esc(HERO.prompt)}</text>
-<rect class="caret" x="${(48 + SIDE_M + pw + 3).toFixed(1)}" y="${TOP_M + 50}" width="7" height="13" fill="${th.accent}"/>
-</g>
-<rect class="hairline" x="${48 + SIDE_M}" y="${TOP_M + 82.5}" width="${W - SIDE_M * 2 - 96}" height="1" fill="${th.border}"/>
+${plateGround(th, W, H, glow)}
 <g class="avatarIn">
-<circle cx="${AX}" cy="${AY}" r="${AR + 3}" fill="url(#ringG)"/>
-<circle cx="${AX}" cy="${AY}" r="${AR + 1}" fill="${th.bg0}"/>
-<g clip-path="url(#avatarClip)"><image href="${d.avatar}" x="${AX - AR}" y="${AY - AR}" width="${AR * 2}" height="${AR * 2}" preserveAspectRatio="xMidYMid slice"/></g>
+<circle class="orbit" cx="${CX}" cy="${AY}" r="${AR + 11}" fill="none" stroke="${th.accent}" stroke-opacity=".4" stroke-width="1.1" stroke-dasharray="3 8"/>
+<polygon points="${hex}" fill="url(#ringG)"/>
+<g clip-path="url(#hexClip)"><image href="${d.avatar}" x="${CX - AR}" y="${AY - AR}" width="${AR * 2}" height="${AR * 2}" preserveAspectRatio="xMidYMid slice"/></g>
+<polygon points="${hex}" fill="none" stroke="${th.bg0}" stroke-opacity=".55" stroke-width="3"/>
 </g>
-<g class="up" style="animation-delay:.5s"><text x="${152 + SIDE_M}" y="${TOP_M + 118}"><tspan class="nm" fill="${th.text}">${esc(HERO.name)}</tspan><tspan class="fw" fill="${th.accent}" dx="13">${fmt(d.followers)} followers</tspan></text></g>
-<rect class="rule" x="${152 + SIDE_M}" y="${TOP_M + 128}" width="52" height="3" rx="1.5" fill="url(#accentG)"/>
-<g class="up" style="animation-delay:.62s"><text x="${152 + SIDE_M}" y="${TOP_M + 148}" class="rl" fill="${th.muted}">${esc(HERO.role)}</text></g>
-<g class="up" style="animation-delay:.74s"><text x="${152 + SIDE_M}" y="${TOP_M + 168}" class="fc" fill="${th.dim}">${esc(HERO.focus)}</text></g>
+<g class="up" style="animation-delay:.3s"><text x="${CX}" y="181" class="nm" fill="${th.text}">${esc(HERO.name)}</text></g>
+<g class="up" style="animation-delay:.42s">${chip}</g>
+<rect class="rule" x="${CX - 33}" y="242" width="66" height="3.5" rx="1.75" fill="url(#accentG)"/>
+<g class="up" style="animation-delay:.54s"><text x="${CX}" y="267" class="rl" fill="${th.muted}">${esc(HERO.role)}</text></g>
+<g class="up" style="animation-delay:.66s"><text x="${CX}" y="290" class="fc" fill="${th.dim}">${esc(HERO.focus)}</text></g>
+${pipeline}
+<text x="${CX}" y="378" class="cp" fill="${th.dim}">${esc(HERO.caption)}</text>
 </svg>
 `;
 }
 
-// -------------------------------------------------------------------- stack
+// -------------------------------------------------------------- stack plate
+//
+// Drawn as the layer diagram it actually is: a bus down the left gutter, one
+// tapped layer per domain, each tool a measured chip rather than a run-on line.
 
 const STACK = [
   { label: 'Frontend', items: ['React', 'Next.js', 'Angular', 'TypeScript', 'Tailwind CSS'] },
@@ -357,50 +431,52 @@ const STACK = [
 
 function stackSVG(key) {
   const th = THEMES[key];
-  const W = 900;
-  const TOP_M = 0, SIDE_M = 0;
-  const ROW_H = 42, PAD = 12;
-  const CH = PAD * 2 + STACK.length * ROW_H;
-  const H = CH;
-  // accent/fork and accent2/repo are the same hues in THEMES, so the real
-  // palette is these three - cycled deliberately rather than padded out
-  // with near-duplicates that would read as a color mistake.
-  const palette = [th.accent, th.star, th.repo];
-  const CHIP_W = 132;
-  const left = SIDE_M + 28;
+  const W = 900, PAD = 20, ROW_H = 46;
+  const H = PAD * 2 + STACK.length * ROW_H;
+
+  const BUS = 58, CHIP_X = 190;
+  const CHIP_FS = 11, CHIP_PAD = 11, CHIP_GAP = 8, CHIP_H = 22;
+  // accent / accent2 / accent3 are the only three hues on the sheet - cycled
+  // deliberately rather than padded out with near-duplicates.
+  const palette = [th.accent, th.accent2, th.accent3];
+
+  const cy = (i) => PAD + i * ROW_H + ROW_H / 2;
+  const bus = `<path d="M${BUS} ${cy(0)}V${cy(STACK.length - 1)}" stroke="${th.frame}" stroke-width="1.2" fill="none"/>`;
 
   const rows = STACK.map((row, i) => {
-    const rowTop = TOP_M + PAD + i * ROW_H;
-    const cy = rowTop + ROW_H / 2;
+    const y = cy(i);
     const color = palette[i % palette.length];
-    const divider = i > 0
-      ? `<line x1="${SIDE_M + 20}" y1="${rowTop}" x2="${W - SIDE_M - 20}" y2="${rowTop}" stroke="${th.border}" stroke-opacity=".5"/>`
-      : '';
-    return `<g class="row" style="animation-delay:${(0.04 + i * 0.06).toFixed(2)}s">`
-      + divider
-      + `<rect x="${left}" y="${(cy - 12).toFixed(1)}" width="${CHIP_W}" height="24" rx="12" fill="${color}" fill-opacity=".14" stroke="${color}" stroke-opacity=".5"/>`
-      + `<text x="${(left + CHIP_W / 2).toFixed(1)}" y="${(cy + 4.5).toFixed(1)}" class="lb" fill="${color}">${esc(row.label)}</text>`
-      + `<text x="${left + CHIP_W + 20}" y="${(cy + 4.5).toFixed(1)}" class="it" fill="${th.text}">${esc(row.items.join(` ${DOT} `))}</text>`
+    let x = CHIP_X;
+    const chips = row.items.map((item) => {
+      const w = Math.round(mw(item, CHIP_FS) + CHIP_PAD * 2);
+      const g = `<g><rect x="${x}" y="${(y - CHIP_H / 2).toFixed(1)}" width="${w}" height="${CHIP_H}" rx="3"`
+        + ` fill="${color}" fill-opacity=".1" stroke="${color}" stroke-opacity=".45"/>`
+        + `<text x="${x + CHIP_PAD}" y="${(y + 4).toFixed(1)}" class="ch" fill="${th.text}">${esc(item)}</text></g>`;
+      x += w + CHIP_GAP;
+      return g;
+    }).join('');
+
+    return `<g class="row" style="animation-delay:${(0.05 + i * 0.07).toFixed(2)}s">`
+      + (i > 0 ? `<path d="M20 ${PAD + i * ROW_H}H${W - 20}" stroke="${th.frame}" stroke-opacity=".35"/>` : '')
+      + `<text x="22" y="${(y + 3.5).toFixed(1)}" class="ix" fill="${th.dim}">L${i + 1}</text>`
+      + `<rect x="${BUS - 4}" y="${y - 4}" width="8" height="8" fill="${color}" transform="rotate(45 ${BUS} ${y})"/>`
+      + `<text x="76" y="${(y + 4).toFixed(1)}" class="lb" fill="${color}">${esc(row.label.toUpperCase())}</text>`
+      + chips
       + `</g>`;
   }).join('');
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Stack: ${STACK.map((r) => `${r.label} - ${r.items.join(', ')}`).join('; ')}">
 <title>Stack</title>
-<defs>
-<linearGradient id="bgG" x1="0" y1="0" x2="1" y2="1">
-<stop offset="0" stop-color="${th.bg0}"/><stop offset="1" stop-color="${th.bg1}"/>
-</linearGradient>
-<clipPath id="cardClip"><rect x="${SIDE_M}" y="${TOP_M}" width="${W - SIDE_M * 2}" height="${CH}" rx="16"/></clipPath>
-${grainFilter('grain')}
-</defs>
-<rect x="${SIDE_M}" y="${TOP_M}" width="${W - SIDE_M * 2}" height="${CH}" rx="16" fill="url(#bgG)" stroke="${th.border}"/>
-<g clip-path="url(#cardClip)"><rect x="${SIDE_M}" y="${TOP_M}" width="${W - SIDE_M * 2}" height="${CH}" filter="url(#grain)" opacity="${th.grainOp}" fill="#ffffff"/></g>
+<defs>${plateDefs(th, W, H)}</defs>
 <style>
-.lb{font-family:${SANS};font-size:12.5px;font-weight:700;text-anchor:middle}
-.it{font-family:${SANS};font-size:13px;font-weight:500}
+.ix{font-family:${MONO};font-size:9.5px;letter-spacing:1px}
+.lb{font-family:${MONO};font-size:11.5px;font-weight:700;letter-spacing:.9px}
+.ch{font-family:${MONO};font-size:${CHIP_FS}px}
 .row{animation:up .5s cubic-bezier(.2,.7,.3,1) both}
-@keyframes up{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@keyframes up{from{transform:translateX(-10px)}to{transform:translateX(0)}}
 </style>
+${plateGround(th, W, H)}
+${bus}
 ${rows}
 </svg>
 `;
@@ -409,22 +485,25 @@ ${rows}
 // ------------------------------------------------------------------ badges
 //
 // Individually clickable, so each link stays its own <a><img></a> pair in the
-// README - but drawn as a pill matching the card system instead of a stock
-// shields.io badge, which is flat-colored and does not follow dark/light.
+// README - drawn as a notched equipment tag so they belong to the drawing set
+// rather than to shields.io, which is flat-coloured and ignores dark/light.
 
 const LINKS = [
   { id: 'linkedin', label: 'LinkedIn', role: 'accent' },
-  { id: 'github', label: 'GitHub', role: 'dim' },
-  { id: 'hf', label: 'Hugging Face', role: 'star' },
+  { id: 'github', label: 'GitHub', role: 'accent3' },
+  { id: 'hf', label: 'Hugging Face', role: 'accent2' },
 ];
 
-function badgeSVG(label, color) {
-  const H = 36, PAD_X = 20;
-  const W = Math.round(label.length * 7.6 + PAD_X * 2);
+function badgeSVG(label, th, color) {
+  const FS = 11, TRACK = 1.1, NOTCH = 9;
+  const text = label.toUpperCase();
+  const H = 34, TX = 30;
+  const W = Math.round(TX + mw(text, FS, TRACK) + 14);
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(label)}">
 <title>${esc(label)}</title>
-<rect x=".5" y=".5" width="${W - 1}" height="${H - 1}" rx="18" fill="${color}" fill-opacity=".13" stroke="${color}" stroke-opacity=".55"/>
-<text x="${W / 2}" y="${H / 2 + 4.5}" text-anchor="middle" fill="${color}" font-family="${SANS}" font-size="13" font-weight="700">${esc(label)}</text>
+<path d="M.5 .5H${W - NOTCH - .5}L${W - .5} ${NOTCH + .5}V${H - .5}H.5Z" fill="${color}" fill-opacity=".1" stroke="${color}" stroke-opacity=".55"/>
+<rect x="14" y="${H / 2 - 3.5}" width="7" height="7" fill="${color}"/>
+<text x="${TX}" y="${H / 2 + 4}" fill="${th.text}" font-family="${MONO}" font-size="${FS}" letter-spacing="${TRACK}">${esc(text)}</text>
 </svg>
 `;
 }
@@ -444,7 +523,7 @@ const files = {
 
 for (const link of LINKS) {
   for (const key of ['dark', 'light']) {
-    files[`badge-${link.id}-${key}.svg`] = badgeSVG(link.label, THEMES[key][link.role]);
+    files[`badge-${link.id}-${key}.svg`] = badgeSVG(link.label, THEMES[key], THEMES[key][link.role]);
   }
 }
 
