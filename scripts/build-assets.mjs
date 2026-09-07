@@ -66,10 +66,14 @@ async function api(path) {
 }
 
 async function collect() {
-  const repos = (await api(`/users/${USER}/repos?per_page=100&type=owner`))
-    .filter((r) => !r.fork && !r.archived);
+  const [user, repos] = await Promise.all([
+    api(`/users/${USER}`),
+    api(`/users/${USER}/repos?per_page=100&type=owner`)
+      .then((rs) => rs.filter((r) => !r.fork && !r.archived)),
+  ]);
 
   return {
+    followers: user.followers,
     stars: repos.reduce((n, r) => n + r.stargazers_count, 0),
     forks: repos.reduce((n, r) => n + r.forks_count, 0),
     repoCount: repos.length,
@@ -198,7 +202,7 @@ const HERO = {
   focus: `Backend Engineering ${DOT} System Design ${DOT} DevOps ${DOT} CI/CD`,
 };
 
-function heroSVG(key) {
+function heroSVG(d, key) {
   const th = THEMES[key];
   const W = 900, H = 190;
   const CW = 7.5; // monospace advance width at 12.5px
@@ -236,7 +240,7 @@ function heroSVG(key) {
     }
   });
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(HERO.name)} ${DASH} ${esc(HERO.role)}">
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(HERO.name)}, ${fmt(d.followers)} followers ${DASH} ${esc(HERO.role)}">
 <title>${esc(HERO.name)} ${DASH} ${esc(HERO.role)}</title>
 <defs>
 <linearGradient id="bgG" x1="0" y1="0" x2="1" y2="1">
@@ -255,6 +259,7 @@ function heroSVG(key) {
 <style>
 .p{font-family:${MONO};font-size:12.5px}
 .nm{font-family:${SANS};font-size:32px;font-weight:800}
+.fw{font-family:${SANS};font-size:15px;font-weight:600}
 .rl{font-family:${SANS};font-size:13.5px}
 .fc{font-family:${MONO};font-size:11.5px;letter-spacing:.4px}
 .type{animation:type 1.45s steps(${HERO.prompt.length + 2}) .25s both;transform-box:fill-box;transform-origin:left}
@@ -284,7 +289,7 @@ ${nodes}
 <text x="48" y="62" class="p" fill="${th.accent}">${esc(HERO.prompt)}</text>
 <rect class="caret" x="${(48 + pw + 3).toFixed(1)}" y="50" width="7" height="13" fill="${th.accent}"/>
 </g>
-<g class="up" style="animation-delay:.55s"><text x="48" y="106" class="nm" fill="${th.text}">${esc(HERO.name)}</text></g>
+<g class="up" style="animation-delay:.55s"><text x="48" y="106"><tspan class="nm" fill="${th.text}">${esc(HERO.name)}</tspan><tspan class="fw" fill="${th.accent}" dx="14">${fmt(d.followers)} followers</tspan></text></g>
 <rect class="rule" x="48" y="119.5" width="64" height="3" rx="1.5" fill="url(#accentG)"/>
 <g class="up" style="animation-delay:.7s"><text x="48" y="148" class="rl" fill="${th.muted}">${esc(HERO.role)}</text></g>
 <g class="up" style="animation-delay:.82s"><text x="48" y="171" class="fc" fill="${th.dim}">${esc(HERO.focus)}</text></g>
@@ -297,8 +302,8 @@ ${nodes}
 const data = await collect();
 
 const files = {
-  'hero-dark.svg': heroSVG('dark'),
-  'hero-light.svg': heroSVG('light'),
+  'hero-dark.svg': heroSVG(data, 'dark'),
+  'hero-light.svg': heroSVG(data, 'light'),
   'impact-dark.svg': impactSVG(data, 'dark'),
   'impact-light.svg': impactSVG(data, 'light'),
 };
