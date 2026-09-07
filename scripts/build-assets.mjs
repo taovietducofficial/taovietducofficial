@@ -431,11 +431,14 @@ const STACK = [
 
 function stackSVG(key) {
   const th = THEMES[key];
-  const W = 900, PAD = 20, ROW_H = 46;
+  const W = 900, PAD = 22, ROW_H = 54;
   const H = PAD * 2 + STACK.length * ROW_H;
 
-  const BUS = 58, CHIP_X = 190;
-  const CHIP_FS = 11, CHIP_PAD = 11, CHIP_GAP = 8, CHIP_H = 22;
+  // Sized so the tool names carry at a glance rather than needing a zoom: the
+  // widest row (Engineering) ends at x=796 against a right margin of 880, so
+  // every row still clears the plate edge at this size.
+  const BUS = 62, CHIP_X = 210;
+  const CHIP_FS = 13, CHIP_PAD = 13, CHIP_GAP = 9, CHIP_H = 27;
   // accent / accent2 / accent3 are the only three hues on the sheet - cycled
   // deliberately rather than padded out with near-duplicates.
   const palette = [th.accent, th.accent2, th.accent3];
@@ -458,9 +461,9 @@ function stackSVG(key) {
 
     return `<g class="row" style="animation-delay:${(0.05 + i * 0.07).toFixed(2)}s">`
       + (i > 0 ? `<path d="M20 ${PAD + i * ROW_H}H${W - 20}" stroke="${th.frame}" stroke-opacity=".35"/>` : '')
-      + `<text x="22" y="${(y + 3.5).toFixed(1)}" class="ix" fill="${th.dim}">L${i + 1}</text>`
-      + `<rect x="${BUS - 4}" y="${y - 4}" width="8" height="8" fill="${color}" transform="rotate(45 ${BUS} ${y})"/>`
-      + `<text x="76" y="${(y + 4).toFixed(1)}" class="lb" fill="${color}">${esc(row.label.toUpperCase())}</text>`
+      + `<text x="24" y="${(y + 4).toFixed(1)}" class="ix" fill="${th.dim}">L${i + 1}</text>`
+      + `<rect x="${BUS - 4.5}" y="${y - 4.5}" width="9" height="9" fill="${color}" transform="rotate(45 ${BUS} ${y})"/>`
+      + `<text x="82" y="${(y + 4.5).toFixed(1)}" class="lb" fill="${color}">${esc(row.label.toUpperCase())}</text>`
       + chips
       + `</g>`;
   }).join('');
@@ -469,8 +472,8 @@ function stackSVG(key) {
 <title>Stack</title>
 <defs>${plateDefs(th, W, H)}</defs>
 <style>
-.ix{font-family:${MONO};font-size:9.5px;letter-spacing:1px}
-.lb{font-family:${MONO};font-size:11.5px;font-weight:700;letter-spacing:.9px}
+.ix{font-family:${MONO};font-size:11px;letter-spacing:1px}
+.lb{font-family:${MONO};font-size:13.5px;font-weight:700;letter-spacing:.9px}
 .ch{font-family:${MONO};font-size:${CHIP_FS}px}
 .row{animation:up .5s cubic-bezier(.2,.7,.3,1) both}
 @keyframes up{from{transform:translateX(-10px)}to{transform:translateX(0)}}
