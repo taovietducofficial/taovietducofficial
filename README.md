@@ -22,8 +22,7 @@
 
 </div>
 
-Software Engineer II based in Ho Chi Minh City, and the person behind **[CODE4LIFE®](https://www.facebook.com/CODE4LIFEOFFICIAL)** — a Vietnamese IT education brand followed by 250K+ people.
-I ship real systems, then turn the same ground into free, structured repos so other students can climb it too.
+Software Engineer II based in Ho Chi Minh City · Aspiring DevOps Engineer. I build real-world systems, automate what can be automated, and turn practical engineering experience into free, structured open-source projects to help other developers grow.
 
 <div align="center">
 
