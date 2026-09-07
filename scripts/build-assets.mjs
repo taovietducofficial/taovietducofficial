@@ -212,7 +212,7 @@ const HERO = {
   prompt: 'taovietducofficial ~ $ whoami',
   name: 'Tào Việt Đức',
   role: `Software Engineer II ${DOT} Aspiring DevOps Engineer`,
-  focus: `DSA ${DOT} OOP ${DOT} CI/CD ${DOT} Data Engineering`,
+  focus: `Backend Engineering ${DOT} System Design ${DOT} DevOps ${DOT} CI/CD`,
 };
 
 function heroSVG(key) {
