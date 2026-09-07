@@ -406,6 +406,29 @@ ${rows}
 `;
 }
 
+// ------------------------------------------------------------------ badges
+//
+// Individually clickable, so each link stays its own <a><img></a> pair in the
+// README - but drawn as a pill matching the card system instead of a stock
+// shields.io badge, which is flat-colored and does not follow dark/light.
+
+const LINKS = [
+  { id: 'linkedin', label: 'LinkedIn', role: 'accent' },
+  { id: 'github', label: 'GitHub', role: 'dim' },
+  { id: 'hf', label: 'Hugging Face', role: 'star' },
+];
+
+function badgeSVG(label, color) {
+  const H = 36, PAD_X = 20;
+  const W = Math.round(label.length * 7.6 + PAD_X * 2);
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(label)}">
+<title>${esc(label)}</title>
+<rect x=".5" y=".5" width="${W - 1}" height="${H - 1}" rx="18" fill="${color}" fill-opacity=".13" stroke="${color}" stroke-opacity=".55"/>
+<text x="${W / 2}" y="${H / 2 + 4.5}" text-anchor="middle" fill="${color}" font-family="${SANS}" font-size="13" font-weight="700">${esc(label)}</text>
+</svg>
+`;
+}
+
 // -------------------------------------------------------------------- main
 
 const data = await collect();
@@ -418,6 +441,12 @@ const files = {
   'stack-dark.svg': stackSVG('dark'),
   'stack-light.svg': stackSVG('light'),
 };
+
+for (const link of LINKS) {
+  for (const key of ['dark', 'light']) {
+    files[`badge-${link.id}-${key}.svg`] = badgeSVG(link.label, THEMES[key][link.role]);
+  }
+}
 
 for (const [name, svg] of Object.entries(files)) {
   await writeFile(join(OUT, name), svg, 'utf8');
