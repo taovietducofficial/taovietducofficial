@@ -25,13 +25,5 @@
 Software Engineer II based in Ho Chi Minh City · Aspiring DevOps Engineer. I build real-world systems, automate what can be automated, and turn practical engineering experience into free, structured open-source projects to help other developers grow.
 
 <div align="center">
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/output/snake-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/output/snake.svg">
-  <img alt="A snake eating my contribution graph" src="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/output/snake.svg">
-</picture>
-
-<sub>Counters above are regenerated straight from the GitHub API every six hours — no third-party stat service in the loop.</sub>
-
+<img src="https://cdn.dribbble.com/users/1059583/screenshots/4171367/coding-freak.gif" alt="dev banner" width="100%"/>
 </div>
