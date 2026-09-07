@@ -5,7 +5,12 @@ name: profile assets
 
 on:
   schedule:
-    - cron: '17 */6 * * *'
+    # Every 10 minutes, offset off the hour. An SVG served to a README cannot
+    # fetch anything at view time, so the follower count is only ever as fresh as
+    # the last build - this is the tightest honest loop GitHub allows. The offset
+    # matters: schedules landing on :00 queue behind the platform-wide rush and
+    # are the ones GitHub drops first under load.
+    - cron: '3-59/10 * * * *'
   workflow_dispatch:
   push:
     branches: [main]
