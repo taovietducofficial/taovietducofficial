@@ -29,15 +29,6 @@ const MONO = "ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace";
 const DOT = '·';
 const DASH = '—';
 
-/** Flagship card copy. Kept here so the wording is reviewed, not scraped. */
-const FLAGSHIP = {
-  repo: 'CI-CD-Beginner',
-  title: 'CI/CD Beginner',
-  blurb: `Production CI/CD pipeline template ${DASH} quality gates, container security, SLSA provenance, cosign signing.`,
-  chips: ['Quality gates', 'SLSA', 'Cosign'],
-  meta: `Shell ${DOT} Docker ${DOT} GitHub Actions`,
-};
-
 const THEMES = {
   dark: {
     panel: '#161b22', border: '#30363d', text: '#e6edf3', muted: '#8b949e', dim: '#6e7681',
@@ -211,73 +202,6 @@ ${groups}
 `;
 }
 
-// ------------------------------------------------------------ flagship card
-
-function cardSVG(d, key) {
-  const th = THEMES[key];
-  const W = 900, H = 132;
-  const r = d.repos.find((x) => x.name === FLAGSHIP.repo);
-  const stars = r ? r.stargazers_count : 0;
-  const forks = r ? r.forks_count : 0;
-
-  let cx = 30;
-  const chips = FLAGSHIP.chips.map((label, i) => {
-    const w = label.length * 6.1 + 22;
-    const g = `<g class="up" style="animation-delay:${(0.4 + i * 0.06).toFixed(2)}s">`
-      + `<rect x="${cx.toFixed(1)}" y="97" width="${w.toFixed(1)}" height="20" rx="10" fill="${th.chip}" stroke="${th.border}"/>`
-      + `<text x="${(cx + w / 2).toFixed(1)}" y="111" class="chip" fill="${th.muted}">${esc(label)}</text></g>`;
-    cx += w + 8;
-    return g;
-  }).join('');
-
-  const stats = [
-    { v: stars, l: 'STARS', c: th.star },
-    { v: forks, l: 'FORKS', c: th.fork },
-    { v: d.downloads, l: 'DOWNLOADS', c: th.down },
-  ].map((s, i) => {
-    const x = 632 + i * 104;
-    return `<g class="up" style="animation-delay:${(0.34 + i * 0.09).toFixed(2)}s">`
-      + `<text x="${x}" y="64" class="sv" fill="${s.c}">${fmt(s.v)}</text>`
-      + `<text x="${x}" y="84" class="sl" fill="${th.muted}">${s.l}</text></g>`;
-  }).join('');
-
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(FLAGSHIP.title)}: ${esc(FLAGSHIP.blurb)} ${fmt(stars)} stars, ${fmt(forks)} forks, ${fmt(d.downloads)} downloads">
-<title>${esc(FLAGSHIP.title)} ${DASH} ${fmt(stars)} stars</title>
-<defs>
-<clipPath id="cardClip"><rect x="0" y="0" width="${W}" height="${H}" rx="12"/></clipPath>
-<linearGradient id="barG" x1="0" y1="0" x2="0" y2="1">
-<stop offset="0" stop-color="${th.fork}"/><stop offset="1" stop-color="${th.repo}"/>
-</linearGradient></defs>
-<style>
-.t{font-family:${SANS};font-size:20px;font-weight:700}
-.b{font-family:${SANS};font-size:12px}
-.s{font-family:${MONO};font-size:11px}
-.m{font-family:${MONO};font-size:10.5px}
-.chip{font-family:${SANS};font-size:10.5px;font-weight:600;text-anchor:middle}
-.sv{font-family:${SANS};font-size:19px;font-weight:700;text-anchor:middle}
-.sl{font-family:${SANS};font-size:9.5px;font-weight:600;letter-spacing:1.1px;text-anchor:middle}
-.card{animation:fade .5s ease-out both}
-.up{animation:up .5s cubic-bezier(.2,.7,.3,1) both}
-.bar{animation:grow .7s cubic-bezier(.2,.7,.3,1) .1s both;transform-box:fill-box;transform-origin:top}
-@keyframes fade{from{opacity:0}to{opacity:1}}
-@keyframes up{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
-@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
-</style>
-<g class="card">
-<rect x=".5" y=".5" width="${W - 1}" height="${H - 1}" rx="12" fill="${th.panel}" stroke="${th.border}"/>
-<g clip-path="url(#cardClip)"><rect class="bar" x="0" y="0" width="4" height="${H}" fill="url(#barG)"/></g>
-<g class="up" style="animation-delay:.12s"><text x="30" y="32" class="s" fill="${th.dim}">${USER}/${esc(FLAGSHIP.repo)}</text></g>
-<g class="up" style="animation-delay:.18s"><text x="30" y="60" class="t" fill="${th.text}">${esc(FLAGSHIP.title)}</text></g>
-<g class="up" style="animation-delay:.26s"><text x="30" y="83" class="b" fill="${th.muted}">${esc(FLAGSHIP.blurb)}</text></g>
-${chips}
-<g class="up" style="animation-delay:.46s"><text x="${(cx + 6).toFixed(1)}" y="111" class="m" fill="${th.dim}">${esc(FLAGSHIP.meta)}</text></g>
-<line x1="598" y1="34" x2="598" y2="98" stroke="${th.border}" stroke-width="1"/>
-${stats}
-</g>
-</svg>
-`;
-}
-
 // -------------------------------------------------------------------- hero
 //
 // The copy here is static, but the file is generated rather than hand-written so
@@ -396,8 +320,6 @@ const files = {
   'hero-light.svg': heroSVG('light'),
   'impact-dark.svg': impactSVG(data, 'dark'),
   'impact-light.svg': impactSVG(data, 'light'),
-  'card-ci-cd-beginner-dark.svg': cardSVG(data, 'dark'),
-  'card-ci-cd-beginner-light.svg': cardSVG(data, 'light'),
 };
 
 for (const [name, svg] of Object.entries(files)) {
