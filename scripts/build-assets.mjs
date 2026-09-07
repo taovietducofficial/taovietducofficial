@@ -302,9 +302,9 @@ const HERO = {
 
 function heroSVG(d, key) {
   const th = THEMES[key];
-  const W = 900, H = 394, CX = W / 2;
+  const W = 900, H = 430, CX = W / 2;
 
-  const AY = 81, AR = 48; // avatar hexagon centre / circumradius, on the centre axis
+  const AY = 88, AR = 52; // avatar hexagon centre / circumradius, on the centre axis
   const hex = Array.from({ length: 6 }, (_, i) => {
     const a = (i * 60 * Math.PI) / 180;
     return `${(CX + AR * Math.cos(a)).toFixed(2)},${(AY + AR * Math.sin(a)).toFixed(2)}`;
@@ -313,7 +313,7 @@ function heroSVG(d, key) {
   // A delivery pipeline, not a generic network motif: the packet travels the
   // same path the work does. Stretched near the full plate width so it reads as
   // the base of the stack rather than as a fifth line of text.
-  const PGAP = 200, PY = 322;
+  const PGAP = 200, PY = 360;
   const span = PGAP * (HERO.stages.length - 1);
   const PX0 = CX - span / 2;
   const nodes = HERO.stages.map((_, i) => PX0 + i * PGAP);
@@ -321,17 +321,17 @@ function heroSVG(d, key) {
   const pipeline = `<path class="wire" d="M${PX0} ${PY}H${nodes[nodes.length - 1]}" stroke="${th.accent}"/>`
     + nodes.map((x, i) =>
       `<g class="node" style="animation-delay:${(i * 0.85).toFixed(2)}s">`
-      + `<circle cx="${x}" cy="${PY}" r="8" fill="${th.bg0}" stroke="${th.accent}" stroke-width="1.5"/>`
-      + `<circle cx="${x}" cy="${PY}" r="3" fill="${th.accent}"/></g>`
-      + `<text x="${x}" y="${PY + 26}" class="sg" fill="${th.dim}">${HERO.stages[i]}</text>`).join('')
-    + `<g class="packet"><circle cx="${PX0}" cy="${PY}" r="3.6" fill="${th.accent2}"/></g>`;
+      + `<circle cx="${x}" cy="${PY}" r="9" fill="${th.bg0}" stroke="${th.accent}" stroke-width="1.6"/>`
+      + `<circle cx="${x}" cy="${PY}" r="3.5" fill="${th.accent}"/></g>`
+      + `<text x="${x}" y="${PY + 28}" class="sg" fill="${th.dim}">${HERO.stages[i]}</text>`).join('')
+    + `<g class="packet"><circle cx="${PX0}" cy="${PY}" r="4" fill="${th.accent2}"/></g>`;
 
-  const glow = `<ellipse class="glow" cx="${CX}" cy="${AY + 20}" rx="360" ry="210" fill="url(#glowG)"/>`;
+  const glow = `<ellipse class="glow" cx="${CX}" cy="${AY + 20}" rx="380" ry="225" fill="url(#glowG)"/>`;
 
   // Live follower readout. The count is right-anchored inside a slot sized for
   // the final figure, so every frame of the roll lands flush against the same
   // edge and nothing downstream of it shifts while the number climbs.
-  const FS = 12, TR = 1.3, HROW = 20, CHIP_Y = 198, CHIP_H = 31;
+  const FS = 13.5, TR = 1.3, HROW = 22, CHIP_Y = 218, CHIP_H = 34;
   const baseY = CHIP_Y + CHIP_H / 2 + 4.5;
   const count = fmt(d.followers);
   const wLabel = mw('GITHUB', FS, TR), wUnit = mw('FOLLOWERS', FS, TR), wNum = mw(count, FS, TR);
@@ -364,17 +364,17 @@ ${plateDefs(th, W, H)}
 <stop offset="0" stop-color="${th.accent}"/><stop offset="1" stop-color="${th.accent2}"/>
 </linearGradient>
 <clipPath id="hexClip"><polygon points="${hex}"/></clipPath>
-<clipPath id="fwin"><rect x="${(slotL - 2).toFixed(1)}" y="${baseY - 13}" width="${(wNum + 4).toFixed(1)}" height="18"/></clipPath>
+<clipPath id="fwin"><rect x="${(slotL - 2).toFixed(1)}" y="${baseY - 14}" width="${(wNum + 4).toFixed(1)}" height="20"/></clipPath>
 </defs>
 <style>
 text{text-anchor:middle}
-.nm{font-family:${SANS};font-size:35px;font-weight:800}
-.rl{font-family:${SANS};font-size:15px}
+.nm{font-family:${SANS};font-size:38px;font-weight:800}
+.rl{font-family:${SANS};font-size:17px}
 .gh{font-family:${MONO};font-size:${FS}px;letter-spacing:${TR}px;text-anchor:start}
 .num{font-family:${MONO};font-size:${FS}px;letter-spacing:${TR}px;text-anchor:end;font-variant-numeric:tabular-nums}
-.fc{font-family:${MONO};font-size:12.5px;letter-spacing:.3px}
-.cp{font-family:${MONO};font-size:10.5px;letter-spacing:1.5px}
-.sg{font-family:${MONO};font-size:9.5px;letter-spacing:1.2px}
+.fc{font-family:${MONO};font-size:14px;letter-spacing:.3px}
+.cp{font-family:${MONO};font-size:12px;letter-spacing:1.5px}
+.sg{font-family:${MONO};font-size:11px;letter-spacing:1.2px}
 .up{animation:up .6s cubic-bezier(.2,.7,.3,1) both}
 .avatarIn{animation:avatarIn .7s cubic-bezier(.2,.7,.3,1) .12s both;transform-box:fill-box;transform-origin:center}
 .orbit{animation:spin 26s linear infinite;transform-origin:${CX}px ${AY}px}
@@ -403,13 +403,13 @@ ${plateGround(th, W, H, glow)}
 <g clip-path="url(#hexClip)"><image href="${d.avatar}" x="${CX - AR}" y="${AY - AR}" width="${AR * 2}" height="${AR * 2}" preserveAspectRatio="xMidYMid slice"/></g>
 <polygon points="${hex}" fill="none" stroke="${th.bg0}" stroke-opacity=".55" stroke-width="3"/>
 </g>
-<g class="up" style="animation-delay:.3s"><text x="${CX}" y="181" class="nm" fill="${th.text}">${esc(HERO.name)}</text></g>
+<g class="up" style="animation-delay:.3s"><text x="${CX}" y="198" class="nm" fill="${th.text}">${esc(HERO.name)}</text></g>
 <g class="up" style="animation-delay:.42s">${chip}</g>
-<rect class="rule" x="${CX - 33}" y="242" width="66" height="3.5" rx="1.75" fill="url(#accentG)"/>
-<g class="up" style="animation-delay:.54s"><text x="${CX}" y="267" class="rl" fill="${th.muted}">${esc(HERO.role)}</text></g>
-<g class="up" style="animation-delay:.66s"><text x="${CX}" y="290" class="fc" fill="${th.dim}">${esc(HERO.focus)}</text></g>
+<rect class="rule" x="${CX - 36}" y="268" width="72" height="3.5" rx="1.75" fill="url(#accentG)"/>
+<g class="up" style="animation-delay:.54s"><text x="${CX}" y="296" class="rl" fill="${th.muted}">${esc(HERO.role)}</text></g>
+<g class="up" style="animation-delay:.66s"><text x="${CX}" y="322" class="fc" fill="${th.dim}">${esc(HERO.focus)}</text></g>
 ${pipeline}
-<text x="${CX}" y="378" class="cp" fill="${th.dim}">${esc(HERO.caption)}</text>
+<text x="${CX}" y="414" class="cp" fill="${th.dim}">${esc(HERO.caption)}</text>
 </svg>
 `;
 }
