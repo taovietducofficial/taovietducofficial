@@ -38,7 +38,10 @@
 
 </div>
 
-Software Engineer II based in Ho Chi Minh City · Aspiring DevOps Engineer. I build real-world systems, automate what can be automated, and turn practical engineering experience into free, structured open-source projects to help other developers grow.
+<p align="center">
+  Software Engineer II based in Ho Chi Minh City · Aspiring DevOps Engineer.<br>
+  I build real-world systems, automate what can be automated, and turn practical engineering experience into free, structured open-source projects to help other developers grow.
+</p>
 
 ## Stack
 
