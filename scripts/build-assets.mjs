@@ -355,6 +355,70 @@ ${nodes}
 `;
 }
 
+// -------------------------------------------------------------------- stack
+
+const STACK = [
+  { label: 'Frontend', items: ['React', 'Next.js', 'Angular', 'TypeScript', 'Tailwind CSS'] },
+  { label: 'Backend', items: ['Java', 'Spring Boot', 'Go', 'Node.js', 'Express', 'Python'] },
+  { label: 'Data', items: ['PostgreSQL', 'MongoDB', 'Redis', 'Kafka'] },
+  { label: 'GenAI', items: ['GenAI', 'AI Integration'] },
+  { label: 'DevOps', items: ['Linux', 'Docker', 'Kubernetes', 'GitHub Actions', 'CI/CD'] },
+  { label: 'Cloud', items: ['AWS', 'On-Premises'] },
+  { label: 'Engineering', items: ['REST API', 'Microservices', 'System Design', 'Testing', 'Observability'] },
+];
+
+function stackSVG(key) {
+  const th = THEMES[key];
+  const W = 900;
+  const TOP_M = 4, SIDE_M = 4, BOTTOM_M = 18;
+  const ROW_H = 42, PAD = 12;
+  const CH = PAD * 2 + STACK.length * ROW_H;
+  const H = TOP_M + CH + BOTTOM_M;
+  // accent/fork and accent2/repo are the same hues in THEMES, so the real
+  // palette is these three - cycled deliberately rather than padded out
+  // with near-duplicates that would read as a color mistake.
+  const palette = [th.accent, th.star, th.repo];
+  const CHIP_W = 132;
+  const left = SIDE_M + 28;
+
+  const rows = STACK.map((row, i) => {
+    const rowTop = TOP_M + PAD + i * ROW_H;
+    const cy = rowTop + ROW_H / 2;
+    const color = palette[i % palette.length];
+    const divider = i > 0
+      ? `<line x1="${SIDE_M + 20}" y1="${rowTop}" x2="${W - SIDE_M - 20}" y2="${rowTop}" stroke="${th.border}" stroke-opacity=".5"/>`
+      : '';
+    return `<g class="row" style="animation-delay:${(0.04 + i * 0.06).toFixed(2)}s">`
+      + divider
+      + `<rect x="${left}" y="${(cy - 12).toFixed(1)}" width="${CHIP_W}" height="24" rx="12" fill="${color}" fill-opacity=".14" stroke="${color}" stroke-opacity=".5"/>`
+      + `<text x="${(left + CHIP_W / 2).toFixed(1)}" y="${(cy + 4.5).toFixed(1)}" class="lb" fill="${color}">${esc(row.label)}</text>`
+      + `<text x="${left + CHIP_W + 20}" y="${(cy + 4.5).toFixed(1)}" class="it" fill="${th.text}">${esc(row.items.join(` ${DOT} `))}</text>`
+      + `</g>`;
+  }).join('');
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Stack: ${STACK.map((r) => `${r.label} - ${r.items.join(', ')}`).join('; ')}">
+<title>Stack</title>
+<defs>
+<linearGradient id="bgG" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="${th.bg0}"/><stop offset="1" stop-color="${th.bg1}"/>
+</linearGradient>
+<clipPath id="cardClip"><rect x="${SIDE_M}" y="${TOP_M}" width="${W - SIDE_M * 2}" height="${CH}" rx="16"/></clipPath>
+${grainFilter('grain')}
+${shadowFilter('cardShadow', th, 7, 16)}
+</defs>
+<rect x="${SIDE_M}" y="${TOP_M}" width="${W - SIDE_M * 2}" height="${CH}" rx="16" fill="url(#bgG)" stroke="${th.border}" filter="url(#cardShadow)"/>
+<g clip-path="url(#cardClip)"><rect x="${SIDE_M}" y="${TOP_M}" width="${W - SIDE_M * 2}" height="${CH}" filter="url(#grain)" opacity="${th.grainOp}" fill="#ffffff"/></g>
+<style>
+.lb{font-family:${SANS};font-size:12.5px;font-weight:700;text-anchor:middle}
+.it{font-family:${SANS};font-size:13px;font-weight:500}
+.row{animation:up .5s cubic-bezier(.2,.7,.3,1) both}
+@keyframes up{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+</style>
+${rows}
+</svg>
+`;
+}
+
 // -------------------------------------------------------------------- main
 
 const data = await collect();
@@ -364,6 +428,8 @@ const files = {
   'hero-light.svg': heroSVG(data, 'light'),
   'impact-dark.svg': impactSVG(data, 'dark'),
   'impact-light.svg': impactSVG(data, 'light'),
+  'stack-dark.svg': stackSVG('dark'),
+  'stack-light.svg': stackSVG('light'),
 };
 
 for (const [name, svg] of Object.entries(files)) {

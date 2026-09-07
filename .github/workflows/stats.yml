@@ -47,7 +47,7 @@ jobs:
 
       - name: Bump the README's asset cache-buster
         if: steps.diff.outputs.changed == 'true'
-        run: sed -i -E "s#(assets/(hero|impact)-(dark|light)\.svg)(\?v=[0-9]+)?#\1?v=$(date +%s)#g" README.md
+        run: sed -i -E "s#(assets/(hero|impact|stack)-(dark|light)\.svg)(\?v=[0-9]+)?#\1?v=$(date +%s)#g" README.md
 
       - name: Commit and push
         if: steps.diff.outputs.changed == 'true'

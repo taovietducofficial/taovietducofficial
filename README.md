@@ -1,9 +1,9 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/hero-dark.svg?v=1788792099">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/hero-light.svg?v=1788792099">
-  <img alt="Tào Việt Đức — Software Engineer II · Aspiring DevOps Engineer" src="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/hero-light.svg?v=1788792099" width="900">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/hero-dark.svg?v=1788792348">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/hero-light.svg?v=1788792348">
+  <img alt="Tào Việt Đức — Software Engineer II · Aspiring DevOps Engineer" src="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/hero-light.svg?v=1788792348" width="900">
 </picture>
 
 <a href="https://www.linkedin.com/in/taovietducofficial"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"></a>
@@ -14,9 +14,9 @@
 
 <a href="https://github.com/taovietducofficial?tab=repositories">
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/impact-dark.svg?v=1788792099">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/impact-light.svg?v=1788792099">
-  <img alt="Total stars, forks and public repositories" src="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/impact-light.svg?v=1788792099" width="900">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/impact-dark.svg?v=1788792348">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/impact-light.svg?v=1788792348">
+  <img alt="Total stars, forks and public repositories" src="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/impact-light.svg?v=1788792348" width="900">
 </picture>
 </a>
 
@@ -26,15 +26,11 @@ Software Engineer II based in Ho Chi Minh City · Aspiring DevOps Engineer. I bu
 
 ## Stack
 
-| | |
-| :-- | :-- |
-| **Frontend** | React · Next.js · Angular · TypeScript · Tailwind CSS |
-| **Backend** | Java · Spring Boot · Go · Node.js · Express · Python |
-| **Data** | PostgreSQL · MongoDB · Redis · Kafka |
-| **GenAI** | GenAI · AI Integration |
-| **DevOps** | Linux · Docker · Kubernetes · GitHub Actions · CI/CD |
-| **Cloud** | AWS · On-Premises |
-| **Engineering** | REST API · Microservices · System Design · Testing · Observability |
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/stack-dark.svg?v=1788792348">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/stack-light.svg?v=1788792348">
+  <img alt="Stack: Frontend - React, Next.js, Angular, TypeScript, Tailwind CSS. Backend - Java, Spring Boot, Go, Node.js, Express, Python. Data - PostgreSQL, MongoDB, Redis, Kafka. GenAI - GenAI, AI Integration. DevOps - Linux, Docker, Kubernetes, GitHub Actions, CI/CD. Cloud - AWS, On-Premises. Engineering - REST API, Microservices, System Design, Testing, Observability." src="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/stack-light.svg?v=1788792348" width="900">
+</picture>
 
 <div align="center">
 <img src="https://cdn.dribbble.com/users/1059583/screenshots/4171367/coding-freak.gif" alt="dev banner" width="100%"/>
