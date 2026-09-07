@@ -49,5 +49,11 @@ Software Engineer II based in Ho Chi Minh City · Aspiring DevOps Engineer. I bu
 </picture>
 
 <div align="center">
-<img src="https://cdn.dribbble.com/users/1059583/screenshots/4171367/coding-freak.gif" alt="dev banner" width="100%"/>
+  <img
+    src="https://cdn.dribbble.com/users/1059583/screenshots/4171367/coding-freak.gif"
+    alt="dev banner"
+    width="100%"
+  />
 </div>
+
+<div align="center"><b>Build. Deploy. Monitor. Improve.</b></div>
