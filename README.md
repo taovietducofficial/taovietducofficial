@@ -28,8 +28,6 @@
 </picture>
 </a>
 
-<br><br>
-
 <a href="https://github.com/taovietducofficial?tab=repositories">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/impact-dark.svg?v=1788792880">
