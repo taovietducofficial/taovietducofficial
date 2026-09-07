@@ -512,18 +512,27 @@ const ICONS = {
   gmail: 'M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z',
 };
 
+// SIDE is transparent margin carried inside the viewBox. The README sets these
+// images to percentage widths and butts the anchors together with no whitespace
+// between them - whitespace is the only place a line may break, so removing it
+// is what keeps the row on one line at any viewport - which leaves no character
+// to space the tags apart. The gap has to travel inside the artwork instead.
+const BADGE_SIDE = 8;
+
 function badgeSVG(id, label, th, color) {
-  const FS = 11, TRACK = 1.1, NOTCH = 9, ICON = 14, PAD = 14;
+  const FS = 11, TRACK = 1.1, NOTCH = 9, ICON = 14, PAD = 14, SIDE = BADGE_SIDE;
   const text = label.toUpperCase();
   const H = 34;
   const TX = PAD + ICON + 10;
-  const W = Math.round(TX + mw(text, FS, TRACK) + PAD);
+  const TAG = Math.round(TX + mw(text, FS, TRACK) + PAD);
+  const W = TAG + SIDE * 2;
+  const L = SIDE, R = SIDE + TAG;
   const s = (ICON / 24).toFixed(4);
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(label)}">
 <title>${esc(label)}</title>
-<path d="M.5 .5H${W - NOTCH - .5}L${W - .5} ${NOTCH + .5}V${H - .5}H.5Z" fill="${color}" fill-opacity=".1" stroke="${color}" stroke-opacity=".55"/>
-<g transform="translate(${PAD} ${(H - ICON) / 2}) scale(${s})"><path d="${ICONS[id]}" fill="${color}"/></g>
-<text x="${TX}" y="${H / 2 + 4}" fill="${th.text}" font-family="${MONO}" font-size="${FS}" letter-spacing="${TRACK}">${esc(text)}</text>
+<path d="M${L + .5} .5H${R - NOTCH - .5}L${R - .5} ${NOTCH + .5}V${H - .5}H${L + .5}Z" fill="${color}" fill-opacity=".1" stroke="${color}" stroke-opacity=".55"/>
+<g transform="translate(${L + PAD} ${(H - ICON) / 2}) scale(${s})"><path d="${ICONS[id]}" fill="${color}"/></g>
+<text x="${L + TX}" y="${H / 2 + 4}" fill="${th.text}" font-family="${MONO}" font-size="${FS}" letter-spacing="${TRACK}">${esc(text)}</text>
 </svg>
 `;
 }
@@ -550,6 +559,20 @@ for (const link of LINKS) {
 for (const [name, svg] of Object.entries(files)) {
   await writeFile(join(OUT, name), svg, 'utf8');
 }
+
+// The badge row is held on one line by giving each tag a share of the container
+// width rather than its natural pixel width, so it scales instead of wrapping.
+// The shares are printed rather than written into the README: they only change
+// when a label does, and a build that rewrites markup is a build that can break
+// it. ROW_FILL leaves headroom so sub-pixel rounding across four images cannot
+// push the run past 100% and force an overflow.
+const ROW_FILL = 99;
+const widths = LINKS.map((l) => ({
+  id: l.id,
+  w: Number(files[`badge-${l.id}-dark.svg`].match(/width="(\d+)"/)[1]),
+}));
+const total = widths.reduce((n, b) => n + b.w, 0);
+console.log(`badge row: ${widths.map((b) => `${b.id} ${b.w}px ${(b.w / total * ROW_FILL).toFixed(2)}%`).join('  ')}`);
 
 console.log(
   `stars=${data.stars} forks=${data.forks} repos=${data.repoCount} followers=${data.followers}`);
