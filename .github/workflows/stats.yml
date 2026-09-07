@@ -52,7 +52,10 @@ jobs:
 
       - name: Bump the README's asset cache-buster
         if: steps.diff.outputs.changed == 'true'
-        run: sed -i -E "s#(assets/(hero|impact|stack|badge-linkedin|badge-github|badge-hf)-(dark|light)\.svg)(\?v=[0-9]+)?#\1?v=$(date +%s)#g" README.md
+        # Matches any assets/<name>-<theme>.svg rather than a hand-listed set,
+        # so a newly added card or badge is cache-busted without anyone
+        # remembering to extend this line.
+        run: sed -i -E "s#(assets/[a-z-]+-(dark|light)\.svg)(\?v=[0-9]+)?#\1?v=$(date +%s)#g" README.md
 
       - name: Commit and push
         if: steps.diff.outputs.changed == 'true'
