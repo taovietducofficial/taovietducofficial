@@ -1,81 +1,38 @@
-name: profile assets
+<p align="center">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/hero-dark.svg?v=1793929125">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/hero-light.svg?v=1793929125">
+  <img alt="Tào Việt Đức — Software Engineer II · Aspiring DevOps Engineer" src="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/hero-light.svg?v=1793929125" width="900">
+</picture>
+</p>
 
-# Regenerates the counter and card SVGs straight from the GitHub API and commits
-# them back. Nothing on the profile depends on a third-party stat service.
+<p align="center">
+<a href="https://www.linkedin.com/in/taovietducofficial"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/badge-linkedin-dark.svg?v=1793929125"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/badge-linkedin-light.svg?v=1793929125"><img alt="LinkedIn" src="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/badge-linkedin-light.svg?v=1793929125" width="25.19%"></picture></a><a href="https://github.com/taovietducofficial"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/badge-github-dark.svg?v=1793929125"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/badge-github-light.svg?v=1793929125"><img alt="GitHub" src="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/badge-github-light.svg?v=1793929125" width="22.09%"></picture></a><a href="https://huggingface.co/taovietducofficial"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/badge-hf-dark.svg?v=1793929125"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/badge-hf-light.svg?v=1793929125"><img alt="Hugging Face" src="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/badge-hf-light.svg?v=1793929125" width="31.00%"></picture></a><a href="mailto:taovietduc.work@gmail.com"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/badge-gmail-dark.svg?v=1793929125"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/badge-gmail-light.svg?v=1793929125"><img alt="Gmail: taovietduc.work@gmail.com" src="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/badge-gmail-light.svg?v=1793929125" width="20.73%"></picture></a>
+</p>
 
-on:
-  schedule:
-    # Every 10 minutes, offset off the hour. An SVG served to a README cannot
-    # fetch anything at view time, so the follower count is only ever as fresh as
-    # the last build - this is the tightest honest loop GitHub allows. The offset
-    # matters: schedules landing on :00 queue behind the platform-wide rush and
-    # are the ones GitHub drops first under load.
-    - cron: '3-59/10 * * * *'
-  workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - scripts/**
-      - .github/workflows/stats.yml
+<p align="center">
+<a href="https://github.com/taovietducofficial?tab=repositories"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/impact-dark.svg?v=1793929125"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/impact-light.svg?v=1793929125"><img alt="Total stars, forks and public repositories" src="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/impact-light.svg?v=1793929125" width="900"></picture></a>
+</p>
 
-permissions:
-  contents: write
-  # Needed only by the keep-alive step at the end of the job.
-  actions: write
+<p align="center">
+  Software Engineer II based in Ho Chi Minh City · Aspiring DevOps Engineer.<br>
+  I build real-world systems, automate what can be automated, and turn practical engineering experience into free, structured open-source projects to help other developers grow.
+</p>
 
-concurrency:
-  group: profile-assets
-  cancel-in-progress: false
+## Stack
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/stack-dark.svg?v=1793929125">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/stack-light.svg?v=1793929125">
+  <img alt="Stack: Frontend - React, Next.js, Angular, TypeScript, Tailwind CSS. Backend - Java, Spring Boot, Go, Node.js, Express, Python. Data - PostgreSQL, MongoDB, Redis, Kafka. GenAI - GenAI, AI Integration. DevOps - Linux, Docker, Kubernetes, GitHub Actions, CI/CD. Cloud - AWS, On-Premises. Engineering - REST API, Microservices, System Design, Testing, Observability." src="https://raw.githubusercontent.com/taovietducofficial/taovietducofficial/main/assets/stack-light.svg?v=1793929125" width="900">
+</picture>
 
-      - uses: actions/setup-node@v7
-        with:
-          node-version: '22'
+<div align="center">
+  <img
+    src="https://cdn.dribbble.com/users/1059583/screenshots/4171367/coding-freak.gif"
+    alt="dev banner"
+    width="100%"
+  />
+</div>
 
-      - name: Regenerate SVGs from the GitHub API
-        run: node scripts/build-assets.mjs
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Check whether the figures moved
-        id: diff
-        run: |
-          if git diff --quiet -- assets; then
-            echo 'figures unchanged'
-            echo 'changed=false' >> "$GITHUB_OUTPUT"
-          else
-            echo 'changed=true' >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Bump the README's asset cache-buster
-        if: steps.diff.outputs.changed == 'true'
-        # Matches any assets/<name>-<theme>.svg rather than a hand-listed set,
-        # so a newly added card or badge is cache-busted without anyone
-        # remembering to extend this line.
-        run: sed -i -E "s#(assets/[a-z-]+-(dark|light)\.svg)(\?v=[0-9]+)?#\1?v=$(date +%s)#g" README.md
-
-      - name: Commit and push
-        if: steps.diff.outputs.changed == 'true'
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets README.md
-          git commit -m 'chore: refresh profile stat assets'
-          git push
-
-      # GitHub suspends a scheduled workflow after 60 days without repository
-      # activity, and this job's own bot commits evidently do not count: the
-      # schedule went quiet exactly 60 days after the last hand-made commit.
-      # Re-enabling an already-enabled workflow changes nothing except resetting
-      # that clock, so doing it on every scheduled run keeps the loop alive.
-      # `always()` so a failed build still keeps the schedule from lapsing.
-      - name: Keep the schedule from being suspended
-        if: always() && github.event_name == 'schedule'
-        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/stats.yml/enable"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+<div align="center"><b>Build. Deploy. Monitor. Improve.</b></div>
